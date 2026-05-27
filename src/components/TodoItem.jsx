@@ -22,7 +22,7 @@ export default function TodoItem({editTask, task, deleteTask}){
                 <button onClick={click => {setEdit(false), editTask(task.id, currentTitle, task.isDone)}} style={{display: edit ? "" : "none"}}>
                     <FaSave style={{color: "white", fontSize: "15px"}}/>
                 </button>
-                <button onClick={click => setEdit(false)} style={{display: edit ? "" : "none"}}>
+                <button onClick={click => {setEdit(false), setCurrentTitle(task.title)}} style={{display: edit ? "" : "none"}}>
                     <MdCancel style={{color: "white", fontSize: "15px"}}/>
                 </button>
                 <button style={{backgroundColor: "#ff6756"}} onClick={click => deleteTask(task.id)}>
