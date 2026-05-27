@@ -2,30 +2,22 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import TodoList from './components/TodoList'
 import AddTask from './components/AddTask'
-import { getAllData, getData, addTaskServer, deleteTaskServer, editTaskServer } from './requests'
+import {getData, addTaskServer, deleteTaskServer, editTaskServer } from './requests'
 
 function App() {
+  console.log("v 1.3")
   const [tasks, setTasks] = useState([])
   const [countTasks, setCountTasks] = useState({})
   const [filter, setFilter] = useState(0)
-  
-  useEffect(()=>{
-    getLoadAllData()
-  }, [tasks])
 
   useEffect(()=>{
     getLoadData()
   }, [filter])
 
-
-  async function getLoadAllData() {
-    const data = await getAllData()
-    setCountTasks(data)
-  }
-
   async function getLoadData() {
     const data = await getData(filter)
-    setTasks(data) 
+    setTasks(data.data) 
+    setCountTasks(data.info)
   }
 
   async function addTask(newTaskTitle) {

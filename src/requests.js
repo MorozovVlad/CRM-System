@@ -1,27 +1,3 @@
-export async function getAllData() {
-    try{
-        let data = await fetch('https://easydev.club/api/v1//todos')
-        let data_json = await data.json()
-        const count_tasks={
-            all:0,
-            inWork:0,
-            completed:0,
-        }
-        data_json.data.map(item => {
-            count_tasks.all++
-            if(item.isDone==true){
-                count_tasks.completed++
-            }else{
-                count_tasks.inWork++
-            }
-        })
-        return count_tasks
-    }catch(err){
-        alert(err)
-    }
-    
-}
-
 export async function getData(filter) {
     try{
         let request = ""
@@ -39,7 +15,7 @@ export async function getData(filter) {
 
         let data = await fetch(request)
         let data_json = await data.json()
-        return data_json.data
+        return data_json
     }catch(err){
         alert(err)
     }
