@@ -21,8 +21,8 @@ export async function getData(filter) {
           request = "https://easydev.club/api/v1/todos?filter=inWork";
         }
 
-        let data = await fetch(request)
-        let data_json = await data.json()
+        const data = await fetch(request)
+        const data_json = await data.json()
         return data_json
     }catch(err){
         alert(err)
@@ -31,7 +31,7 @@ export async function getData(filter) {
     
 export async function addTaskServer(newTask) {
     try{
-        let data = await fetch('https://easydev.club/api/v1/todos',{
+        const data = await fetch('https://easydev.club/api/v1/todos',{
             method: 'POST',
             body: JSON.stringify(newTask)
         })
@@ -43,7 +43,7 @@ export async function addTaskServer(newTask) {
 
 export async function deleteTaskServer(id) {
     try{
-        let data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
+        const data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
             method: 'DELETE',
         })
     }catch(err){
