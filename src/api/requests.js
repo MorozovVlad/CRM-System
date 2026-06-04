@@ -22,8 +22,8 @@ export async function getData(filter) {
         }
 
         const data = await fetch(request)
-        const data_json = await data.json()
-        return data_json
+        const dataJson = await data.json()
+        return dataJson
     }catch(err){
         alert(err)
     }
