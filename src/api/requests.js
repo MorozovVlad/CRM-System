@@ -13,6 +13,14 @@ export async function getData(filter) {
             break
         }
 
+        if(filter == "all"){
+            request = "https://easydev.club/api/v1/todos";
+        }else if (filter == "completed") {
+            request = "https://easydev.club/api/v1/todos?filter=completed";
+        }else if (filter == "inWork") {
+          request = "https://easydev.club/api/v1/todos?filter=inWork";
+        }
+
         let data = await fetch(request)
         let data_json = await data.json()
         return data_json

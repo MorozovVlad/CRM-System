@@ -12,7 +12,7 @@ import {
 export default function TodoPage() {
   const [tasks, setTasks] = useState([]);
   const [countTasks, setCountTasks] = useState({});
-  const [filter, setFilter] = useState(0);
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     getLoadData();
