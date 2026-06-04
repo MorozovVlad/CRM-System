@@ -3,13 +3,13 @@ export async function getData(filter) {
         let request = ""
         switch(filter){
         case 0:
-            request = "https://easydev.club/api/v1//todos"
+            request = "https://easydev.club/api/v1/todos"
             break
         case false:
-            request = "https://easydev.club/api/v1//todos?filter=completed"
+            request = "https://easydev.club/api/v1/todos?filter=completed"
             break
         case true:
-            request = "https://easydev.club/api/v1//todos?filter=inWork"
+            request = "https://easydev.club/api/v1/todos?filter=inWork"
             break
         }
 
@@ -23,7 +23,7 @@ export async function getData(filter) {
     
 export async function addTaskServer(newTask) {
     try{
-        let data = await fetch('https://easydev.club/api/v1//todos',{
+        let data = await fetch('https://easydev.club/api/v1/todos',{
             method: 'POST',
             body: JSON.stringify(newTask)
         })
@@ -35,7 +35,7 @@ export async function addTaskServer(newTask) {
 
 export async function deleteTaskServer(id) {
     try{
-        let data = await fetch(`https://easydev.club/api/v1//todos/${id}`,{
+        let data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
             method: 'DELETE',
         })
     }catch(err){
