@@ -4,9 +4,9 @@ import TodoList from "../components/TodoList";
 import AddTask from "../components/AddTask";
 import {
   getData,
-  addTaskServer,
-  deleteTaskServer,
-  editTaskServer,
+  addTaskToServer,
+  deleteTaskFromServer,
+  editTaskOnServer,
 } from "../api/requests";
 
 export default function TodoPage() {
@@ -33,12 +33,12 @@ export default function TodoPage() {
       title: newTaskTitle.trim(),
       isDone: false,
     };
-    await addTaskServer(newTask);
+    await addTaskToServer(newTask);
     await getLoadData();
   }
 
   async function deleteTask(id) {
-    await deleteTaskServer(id);
+    await deleteTaskFromServer(id);
     await getLoadData();
   }
 
@@ -51,7 +51,7 @@ export default function TodoPage() {
       isDone: isDone,
       title: newTitle.trim(),
     };
-    await editTaskServer(newTask, id);
+    await editTaskOnServer(newTask, id);
     await getLoadData();
   }
 

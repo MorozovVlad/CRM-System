@@ -29,7 +29,7 @@ export async function getData(filter) {
     }
 }
     
-export async function addTaskServer(newTask) {
+export async function addTaskToServer(newTask) {
     try{
         const data = await fetch('https://easydev.club/api/v1/todos',{
             method: 'POST',
@@ -41,7 +41,7 @@ export async function addTaskServer(newTask) {
     }
 }
 
-export async function deleteTaskServer(id) {
+export async function deleteTaskFromServer(id) {
     try{
         const data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
             method: 'DELETE',
@@ -52,7 +52,7 @@ export async function deleteTaskServer(id) {
 
 }
 
-export async function editTaskServer(newTask, id) {
+export async function editTaskOnServer(newTask, id) {
     try{
         await fetch(`https://easydev.club/api/v1/todos/${id}`,{
             method: "PUT",
