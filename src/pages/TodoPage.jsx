@@ -19,9 +19,13 @@ export default function TodoPage() {
   }, [filter]);
 
   async function getLoadData() {
-    const data = await getData(filter);
-    setTasks(data.data);
-    setCountTasks(data.info);
+    try{
+        const data = await getData(filter);
+        setTasks(data.data);
+        setCountTasks(data.info);
+    }catch(err){
+        alert("Не удалось загрузить данные");
+    }
   }
 
   async function addTask(newTaskTitle) {
@@ -33,13 +37,21 @@ export default function TodoPage() {
       title: newTaskTitle.trim(),
       isDone: false,
     };
-    await addTaskToServer(newTask);
-    await getLoadData();
+    try{
+        await addTaskToServer(newTask);
+        await getLoadData();
+    }catch(err){
+        alert("Не удалось добавить задачу");
+    } 
   }
 
   async function deleteTask(id) {
-    await deleteTaskFromServer(id);
-    await getLoadData();
+    try{
+        await deleteTaskFromServer(id);
+        await getLoadData();
+    }catch(err){
+        alert("Не удалось удалить задачу")
+    }
   }
 
   async function editTask(id, newTitle, isDone) {
@@ -51,8 +63,12 @@ export default function TodoPage() {
       isDone: isDone,
       title: newTitle.trim(),
     };
-    await editTaskOnServer(newTask, id);
-    await getLoadData();
+    try{
+        await editTaskOnServer(newTask, id);
+        await getLoadData();
+    }catch(err){
+        alert("Не удалось редактировать задачу");
+    }
   }
 
   return (
