@@ -4,7 +4,6 @@ import { deleteTaskFromServer, editTaskOnServer } from "../api/requests";
 
 export default function TodoList({setFilter, filter, countTasks, tasks, getLoadData}){
 
-  // const [error, setError] = useState(null);
 
   async function deleteTask(id) {
     try{
@@ -17,7 +16,6 @@ export default function TodoList({setFilter, filter, countTasks, tasks, getLoadD
 
   async function editTask(id, newTitle, isDone) {
     if (newTitle.trim().length > 64 || newTitle.trim().length < 2) {
-      setError(true)
       return;
     }
     const newTask = {

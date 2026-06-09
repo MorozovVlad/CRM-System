@@ -9,7 +9,16 @@ export default function TodoItem({editTask, task, deleteTask}){
     const [currentTitle, setCurrentTitle] = useState(task.title)
     const [edit, setEdit] = useState(false)
 
+    const [error, setError] = useState(false)
 
+    function checkInput(){
+        if(currentTitle.trim().length > 64 || currentTitle.trim().length < 2){
+            setError(true)
+        }else{
+            setError(false)
+        }
+    }
+    console.log(error)
     return(
         <>
             <div className="todo-item">
@@ -19,7 +28,7 @@ export default function TodoItem({editTask, task, deleteTask}){
                 <button onClick={click => setEdit(true)} style={{display: edit ? "none" : ""}}>
                     <FaEdit style={{color: "white", fontSize: "15px"}}/>
                 </button>
-                <button onClick={click => {setEdit(false), editTask(task.id, currentTitle, task.isDone)}} style={{display: edit ? "" : "none"}}>
+                <button onClick={click => {setEdit(false), editTask(task.id, currentTitle, task.isDone), checkInput()}} style={{display: edit ? "" : "none"}}>
                     <FaSave style={{color: "white", fontSize: "15px"}}/>
                 </button>
                 <button onClick={click => {setEdit(false), setCurrentTitle(task.title)}} style={{display: edit ? "" : "none"}}>
@@ -29,7 +38,8 @@ export default function TodoItem({editTask, task, deleteTask}){
                     <MdDelete style={{color: "white", fontSize: "20px"}}/>
                 </button>
             </div >
-            
+            {error && <p className='error-message'>Длина задачи должна быть от 2 до 64 символов</p>}
+
         </>
     )
 }
