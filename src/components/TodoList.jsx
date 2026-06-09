@@ -2,7 +2,9 @@ import { useState, useEffect } from "react"
 import TodoItem from "./TodoItem"
 import { deleteTaskFromServer, editTaskOnServer } from "../api/requests";
 
-export default function TodoList({setFilter, filter, countTasks, tasks}){
+export default function TodoList({setFilter, filter, countTasks, tasks, getLoadData}){
+
+  // const [error, setError] = useState(null);
 
   async function deleteTask(id) {
     try{
@@ -15,7 +17,7 @@ export default function TodoList({setFilter, filter, countTasks, tasks}){
 
   async function editTask(id, newTitle, isDone) {
     if (newTitle.trim().length > 64 || newTitle.trim().length < 2) {
-      alert("Длина названия задачи должна быть от 2 до 64 символов");
+      setError(true)
       return;
     }
     const newTask = {
@@ -67,6 +69,7 @@ export default function TodoList({setFilter, filter, countTasks, tasks}){
         {tasks.map((task) => {
           return (
             <TodoItem
+              // error={error}
               editTask={editTask}
               deleteTask={deleteTask}
               key={task.id}

@@ -9,6 +9,11 @@ body{
 .add-task{
   display: flex;
   margin-bottom: 30px;
+  flex-direction: column;
+}
+.add-task-main{
+  display: flex;
+  margin-bottom: 10px;
 }
 .input-task{
   font-size: 20px;
@@ -76,4 +81,7 @@ button:hover{
 .todo-item input{
   font-size: 20px;
   cursor: pointer;
+}
+.error-message{
+
 }

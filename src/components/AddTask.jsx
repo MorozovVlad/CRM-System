@@ -3,10 +3,11 @@ import { addTaskToServer } from '../api/requests';
 
 export default function AddTask({ getLoadData }) {
   const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [error, setError] = useState(false);
 
   async function addTask(newTaskTitle) {
     if (newTaskTitle.trim().length > 64 || newTaskTitle.trim().length < 2) {
-      alert("Длина названия задачи должна быть от 2 до 64 символов");
+      setError(true)
       return;
     }
     const newTask = {
@@ -14,6 +15,8 @@ export default function AddTask({ getLoadData }) {
       isDone: false,
     };
     try {
+      setNewTaskTitle("")
+      setError(false)
       await addTaskToServer(newTask);
       await getLoadData();
     } catch (err) {
@@ -23,20 +26,23 @@ export default function AddTask({ getLoadData }) {
 
   return (
     <div className="add-task">
-      <input
-        placeholder="Task To Be Done..."
-        className="input-task"
-        onChange={(e) => setNewTaskTitle(e.target.value)}
-        value={newTaskTitle}
-      />
-      <button
-        className="button-input"
-        onClick={(click) => {
-          (addTask(newTaskTitle), setNewTaskTitle(""));
-        }}
-      >
-        Add
-      </button>
+      <div className='add-task-main'>
+        <input
+          placeholder="Task To Be Done..."
+          className="input-task"
+          onChange={(e) => setNewTaskTitle(e.target.value)}
+          value={newTaskTitle}
+        />
+        <button
+          className="button-input"
+          onClick={(click) => {
+            (addTask(newTaskTitle));
+          }}
+        >
+          Add
+        </button>
+      </div>
+      {error && <p className='error-message'>Длина задачи должна быть от 2 до 64 символов</p>}
     </div>
   );
 }
