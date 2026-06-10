@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { addTaskToServer } from '../api/requests';
 
 export default function AddTask({ getLoadData }) {
@@ -24,6 +24,14 @@ export default function AddTask({ getLoadData }) {
     }
   }
 
+  useEffect(()=>{
+          if(newTaskTitle.trim().length > 64 || newTaskTitle.trim().length < 2){
+              setError(true)
+          }else{
+              setError(false)
+          }
+      }, [newTaskTitle])
+
   return (
     <div className="add-task">
       <div className='add-task-main'>
@@ -42,9 +50,8 @@ export default function AddTask({ getLoadData }) {
           Add
         </button>
       </div>
-      {error && <p className='error-message'>
+      {error && newTaskTitle.length>0 && <p className='error-message'>
                 Длина задачи должна быть от 2 до 64 символов
-                <button className="button-close" onClick={error=>setError(false)}>скрыть</button>
       </p>}
     </div>
   );

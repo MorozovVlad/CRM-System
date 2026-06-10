@@ -15,9 +15,6 @@ export default function TodoList({setFilter, filter, countTasks, tasks, getLoadD
   }
 
   async function editTask(id, newTitle, isDone) {
-    if (newTitle.trim().length > 64 || newTitle.trim().length < 2) {
-      return;
-    }
     const newTask = {
       isDone: isDone,
       title: newTitle.trim(),
@@ -67,7 +64,6 @@ export default function TodoList({setFilter, filter, countTasks, tasks, getLoadD
         {tasks.map((task) => {
           return (
             <TodoItem
-              // error={error}
               editTask={editTask}
               deleteTask={deleteTask}
               key={task.id}

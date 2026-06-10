@@ -82,14 +82,6 @@ button:hover{
   font-size: 20px;
   cursor: pointer;
 }
-.error-message{
-
-}
-.button-close{
-  background: none;
-  margin-left: 5px;
-  border: none;
-}
 .round {
   position: relative;
 }
