@@ -26,18 +26,18 @@ export default function TodoItem({editTask, task, deleteTask}){
                     <input className="round-checkbox" id={task.id} checked={task.isDone} onChange={click => editTask(task.id, currentTitle, !task.isDone)} type="checkbox"/>
                     <label for={task.id}></label>
                 </div>
-                <p style={{ color: task.isDone ? "#909091" : "" ,textDecoration: task.isDone ? "line-through" : "", display: edit ? "none" : "", margin: 0}}>{task.title}</p>
-                <input value={currentTitle} onChange={e => setCurrentTitle(e.target.value)}  style={{display: edit ? "" : "none"}}/>
-                <button onClick={click => setEdit(true)} style={{display: edit ? "none" : ""}}>
+                {!edit && <p className={task.isDone && "task-isDone"}>{task.title}</p>}         
+                {edit && <input value={currentTitle} onChange={e => setCurrentTitle(e.target.value)}/>}
+                {!edit && <button onClick={click => setEdit(true)}>
                     <FaEdit style={{color: "white", fontSize: "15px"}}/>
-                </button>
-                <button onClick={click => {setEdit(false), editTask(task.id, currentTitle, task.isDone), checkInput()}} style={{display: edit ? "" : "none"}}>
+                </button>}
+                {edit && <button onClick={click => {setEdit(false), editTask(task.id, currentTitle, task.isDone), checkInput()}}>
                     <FaSave style={{color: "white", fontSize: "15px"}}/>
-                </button>
-                <button onClick={click => {setEdit(false), setCurrentTitle(task.title)}} style={{display: edit ? "" : "none"}}>
+                </button>}
+                {edit && <button onClick={click => {setEdit(false), setCurrentTitle(task.title)}}>
                     <MdCancel style={{color: "white", fontSize: "15px"}}/>
-                </button>
-                <button style={{backgroundColor: "#ff6756"}} onClick={click => deleteTask(task.id)}>
+                </button>}
+                <button className="red-button" onClick={click => deleteTask(task.id)}>
                     <MdDelete style={{color: "white", fontSize: "20px"}}/>
                 </button>
             </div >

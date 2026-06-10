@@ -132,3 +132,13 @@ button:hover{
 .round input[type="checkbox"]:checked + label:after {
   opacity: 1;
 }
+.task-isDone{
+  color: #909091;
+  text-decoration: line-through;
+}
+.todo-item p{
+  margin: 0;
+}
+.red-button{
+  background-color: #ff6756 !important;
+}
