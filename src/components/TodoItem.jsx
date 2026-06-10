@@ -22,7 +22,10 @@ export default function TodoItem({editTask, task, deleteTask}){
     return(
         <>
             <div className="todo-item">
-                <input checked={task.isDone} onChange={click => editTask(task.id, currentTitle, !task.isDone)} type="checkbox"/>
+                <div class="round">
+                    <input className="round-checkbox" id={task.id} checked={task.isDone} onChange={click => editTask(task.id, currentTitle, !task.isDone)} type="checkbox"/>
+                    <label for={task.id}></label>
+                </div>
                 <p style={{ color: task.isDone ? "#909091" : "" ,textDecoration: task.isDone ? "line-through" : "", display: edit ? "none" : "", margin: 0}}>{task.title}</p>
                 <input value={currentTitle} onChange={e => setCurrentTitle(e.target.value)}  style={{display: edit ? "" : "none"}}/>
                 <button onClick={click => setEdit(true)} style={{display: edit ? "none" : ""}}>
