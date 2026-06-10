@@ -42,7 +42,10 @@ export default function AddTask({ getLoadData }) {
           Add
         </button>
       </div>
-      {error && <p className='error-message'>Длина задачи должна быть от 2 до 64 символов</p>}
+      {error && <p className='error-message'>
+                Длина задачи должна быть от 2 до 64 символов
+                <button className="button-close" onClick={error=>setError(false)}>скрыть</button>
+      </p>}
     </div>
   );
 }

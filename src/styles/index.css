@@ -85,3 +85,8 @@ button:hover{
 .error-message{
 
 }
+.button-close{
+  background: none;
+  margin-left: 5px;
+  border: none;
+}

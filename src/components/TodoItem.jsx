@@ -18,7 +18,7 @@ export default function TodoItem({editTask, task, deleteTask}){
             setError(false)
         }
     }
-    console.log(error)
+
     return(
         <>
             <div className="todo-item">
@@ -38,7 +38,10 @@ export default function TodoItem({editTask, task, deleteTask}){
                     <MdDelete style={{color: "white", fontSize: "20px"}}/>
                 </button>
             </div >
-            {error && <p className='error-message'>Длина задачи должна быть от 2 до 64 символов</p>}
+            {error && <p className='error-message'>
+                Длина задачи должна быть от 2 до 64 символов
+                <button className="button-close" onClick={error=>setError(false)}>скрыть</button>
+            </p>}
 
         </>
     )
