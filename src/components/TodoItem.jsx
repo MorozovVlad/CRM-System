@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react"
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
-import { FaSave } from "react-icons/fa";
-import { MdCancel } from "react-icons/md";
+import {useState} from "react"
+import EditButton from "../icons/EditButton";
+import SaveButton from "../icons/SaveButton";
+import CloseButton from "../icons/CloseButton";
+import DeleteButton from "../icons/DeleteButton";
 
 export default function TodoItem({editTask, task, deleteTask}){
 
@@ -29,16 +29,16 @@ export default function TodoItem({editTask, task, deleteTask}){
                 {!edit && <p className={task.isDone && "task-isDone"}>{task.title}</p>}         
                 {edit && <input value={currentTitle} onChange={e => setCurrentTitle(e.target.value)}/>}
                 {!edit && <button onClick={click => setEdit(true)}>
-                    <FaEdit style={{color: "white", fontSize: "15px"}}/>
+                    <EditButton/>
                 </button>}
                 {edit && <button onClick={click => {setEdit(false), editTask(task.id, currentTitle, task.isDone), checkInput()}}>
-                    <FaSave style={{color: "white", fontSize: "15px"}}/>
+                    <SaveButton/>             
                 </button>}
                 {edit && <button onClick={click => {setEdit(false), setCurrentTitle(task.title)}}>
-                    <MdCancel style={{color: "white", fontSize: "15px"}}/>
+                    <CloseButton/>
                 </button>}
                 <button className="red-button" onClick={click => deleteTask(task.id)}>
-                    <MdDelete style={{color: "white", fontSize: "20px"}}/>
+                    <DeleteButton/>
                 </button>
             </div >
             {error && <p className='error-message'>
