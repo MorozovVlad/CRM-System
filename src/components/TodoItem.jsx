@@ -3,6 +3,7 @@ import EditButton from "../icons/EditButton";
 import SaveButton from "../icons/SaveButton";
 import CloseButton from "../icons/CloseButton";
 import DeleteButton from "../icons/DeleteButton";
+import { validateTaskTitle } from '../helpers/validateTaskTitle';
 
 export default function TodoItem({handleEditTask, task, handleDeleteTask}){
 
@@ -11,7 +12,7 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}){
     const [error, setError] = useState(false)
 
     useEffect(()=>{
-        if(currentTitle.trim().length > 64 || currentTitle.trim().length < 2){
+        if(validateTaskTitle(currentTitle)){
             setError(true)
         }else{
             setError(false)

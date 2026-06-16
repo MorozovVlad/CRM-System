@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react'
 import { addTask } from '../api/requests';
+import { validateTaskTitle } from '../helpers/validateTaskTitle';
 
 export default function AddTask({ getLoadData }) {
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [error, setError] = useState(false);
 
   async function handleAddTask(newTaskTitle) {
-    if (newTaskTitle.trim().length > 64 || newTaskTitle.trim().length < 2) {
+    if (validateTaskTitle(newTaskTitle)) {
       setError(true)
       return;
     }
@@ -25,7 +26,7 @@ export default function AddTask({ getLoadData }) {
   }
 
   useEffect(()=>{
-          if(newTaskTitle.trim().length > 64 || newTaskTitle.trim().length < 2){
+          if(validateTaskTitle(newTaskTitle)){
               setError(true)
           }else{
               setError(false)
