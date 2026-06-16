@@ -3,8 +3,8 @@ import { useState, useEffect } from "react";
 import TodoList from "../components/TodoList";
 import AddTask from "../components/AddTask";
 import {
-  getData,
-  addTaskToServer
+  getTasks,
+  addTask
 } from "../api/requests";
 
 export default function TodoPage() {
@@ -18,7 +18,7 @@ export default function TodoPage() {
 
   async function getLoadData() {
     try{
-        const data = await getData(filter);
+        const data = await getTasks(filter);
         setTasks(data.data);
         setCountTasks(data.info);
     }catch(err){

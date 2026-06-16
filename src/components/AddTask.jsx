@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { addTaskToServer } from '../api/requests';
+import { addTask } from '../api/requests';
 
 export default function AddTask({ getLoadData }) {
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [error, setError] = useState(false);
 
-  async function addTask(newTaskTitle) {
+  async function handleAddTask(newTaskTitle) {
     if (newTaskTitle.trim().length > 64 || newTaskTitle.trim().length < 2) {
       setError(true)
       return;
@@ -17,7 +17,7 @@ export default function AddTask({ getLoadData }) {
     try {
       setNewTaskTitle("")
       setError(false)
-      await addTaskToServer(newTask);
+      await addTask(newTask);
       await getLoadData();
     } catch (err) {
       alert("Не удалось добавить задачу");
@@ -44,7 +44,7 @@ export default function AddTask({ getLoadData }) {
         <button
           className="button-input"
           onClick={(click) => {
-            (addTask(newTaskTitle));
+            (handleAddTask(newTaskTitle));
           }}
         >
           Add

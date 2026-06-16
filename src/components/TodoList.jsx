@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react"
 import TodoItem from "./TodoItem"
-import { deleteTaskFromServer, editTaskOnServer } from "../api/requests";
+import { deleteTask, editTask } from "../api/requests";
 
 export default function TodoList({setFilter, filter, countTasks, tasks, getLoadData}){
 
 
-  async function deleteTask(id) {
+  async function handleDeleteTask(id) {
     try{
-        await deleteTaskFromServer(id);
+        await deleteTask(id);
         await getLoadData();
     }catch(err){
         alert("Не удалось удалить задачу")
     }
   }
 
-  async function editTask(id, newTitle, isDone) {
+  async function handleEditTask(id, newTitle, isDone) {
     const newTask = {
       isDone: isDone,
       title: newTitle.trim(),
     };
     try{
-        await editTaskOnServer(newTask, id);
+        await editTask(newTask, id);
         await getLoadData();
     }catch(err){
         alert("Не удалось редактировать задачу");
@@ -64,8 +64,8 @@ export default function TodoList({setFilter, filter, countTasks, tasks, getLoadD
         {tasks.map((task) => {
           return (
             <TodoItem
-              editTask={editTask}
-              deleteTask={deleteTask}
+              handleEditTask={handleEditTask}
+              handleDeleteTask={handleDeleteTask}
               key={task.id}
               task={task}
             />
