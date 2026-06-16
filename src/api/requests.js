@@ -1,13 +1,5 @@
 export async function getData(filter) {
-    let request = ""
-
-    if(filter == "all"){
-        request = "https://easydev.club/api/v1/todos";
-    }else if (filter == "completed") {
-        request = "https://easydev.club/api/v1/todos?filter=completed";
-    }else if (filter == "inWork") {
-        request = "https://easydev.club/api/v1/todos?filter=inWork";
-    }
+    let request = filter == "all" ? "https://easydev.club/api/v1/todos" : `https://easydev.club/api/v1/todos?filter=${filter}`
 
     const data = await fetch(request)
     if(!data.ok){
