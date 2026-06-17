@@ -4,11 +4,11 @@ import { validateTaskTitle } from '../helpers/validateTaskTitle';
 
 export default function AddTask({ getLoadData }) {
   const [newTaskTitle, setNewTaskTitle] = useState("");
-  const [error, setError] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   async function handleAddTask(newTaskTitle) {
     if (validateTaskTitle(newTaskTitle)) {
-      setError(true)
+      setIsError(true)
       return;
     }
     const newTask = {
@@ -17,7 +17,7 @@ export default function AddTask({ getLoadData }) {
     };
     try {
       setNewTaskTitle("")
-      setError(false)
+      setIsError(false)
       await addTask(newTask);
       await getLoadData();
     } catch (err) {
@@ -48,7 +48,7 @@ export default function AddTask({ getLoadData }) {
           Add
         </button>
       </form>
-      {error && newTaskTitle.length>0 && <p className='error-message'>
+      {isError && newTaskTitle.length>0 && <p className='error-message'>
                 Длина задачи должна быть от 2 до 64 символов
       </p>}
     </div>
