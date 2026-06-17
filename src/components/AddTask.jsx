@@ -41,7 +41,7 @@ export default function AddTask({ getLoadData }) {
         <button
           type="submit"
           className="button-input"
-          onClick={(click) => {
+          onClick={() => {
             (handleAddTask(newTaskTitle));
           }}
         >

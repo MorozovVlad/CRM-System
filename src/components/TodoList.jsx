@@ -34,7 +34,7 @@ export default function TodoList({setFilter, filter, countTasks, tasks, getLoadD
             className={
               filter === "all" ? "button-filter-selected" : "button-filter"
             }
-            onClick={(click) => {
+            onClick={() => {
               setFilter("all");
             }}
           >
@@ -44,7 +44,7 @@ export default function TodoList({setFilter, filter, countTasks, tasks, getLoadD
             className={
               filter === "inWork" ? "button-filter-selected" : "button-filter"
             }
-            onClick={(click) => {
+            onClick={() => {
               setFilter("inWork");
             }}
           >
@@ -54,7 +54,7 @@ export default function TodoList({setFilter, filter, countTasks, tasks, getLoadD
             className={
               filter === "completed" ? "button-filter-selected" : "button-filter"
             }
-            onClick={(click) => {
+            onClick={() => {
               setFilter("completed");
             }}
           >
