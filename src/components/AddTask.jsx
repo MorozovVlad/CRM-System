@@ -25,13 +25,6 @@ export default function AddTask({ getLoadData }) {
     }
   }
 
-  useEffect(()=>{
-          if(validateTaskTitle(newTaskTitle)){
-              setError(true)
-          }else{
-              setError(false)
-          }
-      }, [newTaskTitle])
 
   return (
     <div className="add-task">
