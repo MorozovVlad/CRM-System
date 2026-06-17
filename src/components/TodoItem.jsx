@@ -22,7 +22,7 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}){
 
     return(
         <>
-            <div className="todo-item">
+            <form className="todo-item">
                 <div className="round">
                     <input className="round-checkbox" id={task.id} checked={task.isDone} onChange={click => handleEditTask(task.id, currentTitle, !task.isDone)} type="checkbox"/>
                     <label htmlFor={task.id}></label>
@@ -32,12 +32,12 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}){
                 {!edit && <button onClick={click => setEdit(true)}>
                     <EditButton/>
                 </button>}
-                {edit && <button onClick={click => {     
-                                                        setEdit(false);
-                                                        if(!error){
-                                                            handleEditTask(task.id, currentTitle, task.isDone);
-                                                        }
-                                                    }}>
+                {edit && <button type="submit" onClick={click => {     
+                                                                    setEdit(false);
+                                                                    if(!error){
+                                                                        handleEditTask(task.id, currentTitle, task.isDone);
+                                                                    }
+                                                                }}>
                     <SaveButton/>             
                 </button>}
                 {edit && <button onClick={click => {setEdit(false), setCurrentTitle(task.title)}}>
@@ -46,7 +46,7 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}){
                 <button className="red-button" onClick={click => handleDeleteTask(task.id)}>
                     <DeleteButton/>
                 </button>
-            </div >
+            </form >
             {error && edit && <p className='error-message'>
                 Длина задачи должна быть от 2 до 64 символов
             </p>}

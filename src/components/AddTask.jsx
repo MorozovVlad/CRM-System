@@ -28,14 +28,18 @@ export default function AddTask({ getLoadData }) {
 
   return (
     <div className="add-task">
-      <div className='add-task-main'>
+      <form className='add-task-main' onSubmit={(e)=>{
+        e.preventDefault()
+      }}>
         <input
           placeholder="Task To Be Done..."
           className="input-task"
           onChange={(e) => setNewTaskTitle(e.target.value)}
           value={newTaskTitle}
+          
         />
         <button
+          type="submit"
           className="button-input"
           onClick={(click) => {
             (handleAddTask(newTaskTitle));
@@ -43,7 +47,7 @@ export default function AddTask({ getLoadData }) {
         >
           Add
         </button>
-      </div>
+      </form>
       {error && newTaskTitle.length>0 && <p className='error-message'>
                 Длина задачи должна быть от 2 до 64 символов
       </p>}
