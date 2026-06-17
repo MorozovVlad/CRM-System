@@ -1,0 +1,139 @@
+body{
+  background-color: #f1f4f9;
+  font-family: Arial, sans-serif;
+}
+.main{
+  width: 25%;
+  margin:50px auto;
+}
+.add-task{
+  display: flex;
+  margin-bottom: 30px;
+  flex-direction: column;
+}
+.add-task-main{
+  display: flex;
+  margin-bottom: 10px;
+}
+.input-task{
+  font-size: 20px;
+  width: 70%;
+  margin-right: 5%;
+  padding: 10px;
+  border: 0px;
+  border-bottom: 2px #dadde4 solid;
+  background-color: #f1f4f9;
+}
+.button-input{
+  width: 25%;
+  background-color: #5393ff;
+  border-radius: 10px;
+  border: 0px;
+  color: white;
+  font-size: 20px;
+}
+.button-input:hover{
+  cursor: pointer;
+  background-color: #4085fc;
+}
+.buttons{
+  display: flex;
+  justify-content: space-between;
+}
+.button-filter{
+  background-color: transparent;
+  border: 0px;
+  font-size: 25px;
+  color: #909091;
+}
+.button-filter-selected{
+  background-color: transparent;
+  border: 0px;
+  font-size: 25px;
+  color: #35abe7;
+  text-decoration: underline;
+}
+button:hover{
+  cursor: pointer;
+}
+.todo-item{
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 20px;
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  box-shadow: 0px 20px 40px -10px rgba(34, 60, 80, 0.25);
+}
+.todo-item p{
+  width: 70%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.todo-item button{
+  height: 40px;
+  border-radius: 5px;
+  border: 0px;
+  background-color: #5393ff;
+  width: 60px;
+}
+.todo-item input{
+  font-size: 20px;
+  cursor: pointer;
+}
+.round {
+  position: relative;
+}
+
+.round label {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 15px;
+  left: 0;
+  position: absolute;
+  top: 10px;
+  width: 15px;
+}
+
+.round label:after {
+  border: 2px solid #fff;
+  border-top: none;
+  border-right: none;
+  content: "";
+  height: 2px;
+  left: 2px;
+  opacity: 0;
+  position: absolute;
+  top: 3px;
+  transform: rotate(-45deg);
+  width: 12px;
+}
+
+.round input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.round input[type="checkbox"]:checked + label {
+  background-color: #5393ff;
+  border-color: #5393ff;
+}
+
+.round input[type="checkbox"]:checked + label:after {
+  opacity: 1;
+}
+.task-isDone{
+  color: #909091;
+  text-decoration: line-through;
+}
+.todo-item p{
+  margin: 0;
+}
+.red-button{
+  background-color: #ff6756 !important;
+}
