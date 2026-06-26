@@ -29,7 +29,7 @@ export default function TodoPage() {
 
   return (
     <div className="main">
-      <AddTask getLoadData={getLoadData} />
+      <AddTask getLoadData={ getLoadData } />
       <TodoList
         getLoadData={getLoadData}
         filter={filter}

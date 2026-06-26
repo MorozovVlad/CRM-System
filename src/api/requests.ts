@@ -1,4 +1,6 @@
-export async function getTasks(filter) {
+import { NewTask } from "../types/newTask";
+
+export async function getTasks(filter: string) {
     let request = filter == "all" ? "https://easydev.club/api/v1/todos" : `https://easydev.club/api/v1/todos?filter=${filter}`
 
     const data = await fetch(request)
@@ -9,7 +11,7 @@ export async function getTasks(filter) {
     return dataJson
 }
     
-export async function addTask(newTask) {
+export async function addTask(newTask: NewTask) {
     const data = await fetch('https://easydev.club/api/v1/todos',{
         method: 'POST',
             body: JSON.stringify(newTask)
@@ -19,7 +21,7 @@ export async function addTask(newTask) {
     }
 }
 
-export async function deleteTask(id) {
+export async function deleteTask(id:number) {
     const data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
         method: 'DELETE',
     })
@@ -28,7 +30,7 @@ export async function deleteTask(id) {
     }
 }
 
-export async function editTask(newTask, id) {
+export async function editTask(newTask: NewTask, id:number) {
     const data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
         method: "PUT",
         body: JSON.stringify(newTask)
