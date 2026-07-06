@@ -4,8 +4,15 @@ import SaveButton from "../icons/SaveButton";
 import CloseButton from "../icons/CloseButton";
 import DeleteButton from "../icons/DeleteButton";
 import { validateTaskTitle } from '../helpers/validateTaskTitle';
+import {Task} from "../types/types";
 
-export default function TodoItem({handleEditTask, task, handleDeleteTask}){
+type props = {
+  handleEditTask: (id: number, newTitle: string, isDone: boolean)=> void
+  task: Task
+  handleDeleteTask: (id: number)=>void
+}
+
+export default function TodoItem({handleEditTask, task, handleDeleteTask}: props){
 
     const [currentTitle, setCurrentTitle] = useState(task.title)
     const [isEdit, setIsEdit] = useState(false)
@@ -23,10 +30,10 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}){
         <>
             <form className="todo-item">
                 <div className="round">
-                    <input className="round-checkbox" id={task.id} checked={task.isDone} onChange={() => handleEditTask(task.id, currentTitle, !task.isDone)} type="checkbox"/>
-                    <label htmlFor={task.id}></label>
+                    <input className="round-checkbox" id={String(task.id)} checked={task.isDone} onChange={() => handleEditTask(task.id, currentTitle, !task.isDone)} type="checkbox"/>
+                    <label htmlFor={String(task.id)}></label>
                 </div>
-                {!isEdit && <p className={task.isDone && "task-isDone"}>{task.title}</p>}         
+                {!isEdit && <p className={String(task.isDone && "task-isDone")}>{task.title}</p>}         
                 {isEdit && <input value={currentTitle} onChange={e => {setCurrentTitle(e.target.value)}}/>}
                 {!isEdit && <button onClick={() => setIsEdit(true)}>
                     <EditButton/>
@@ -49,7 +56,6 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}){
             {isError && isEdit && <p className='error-message'>
                 Длина задачи должна быть от 2 до 64 символов
             </p>}
-
         </>
     )
 }

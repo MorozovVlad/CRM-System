@@ -1,19 +1,20 @@
 import { useState, useEffect } from "react"
 import TodoItem from "./TodoItem"
 import { deleteTask, editTask } from "../api/requests";
+import {Task, CountTask} from "../types/types";
 
 type props = {
   setFilter: (filter: string)=> void
   filter: string
-  countTasks: any
-  tasks: ()
+  countTasks: CountTask
+  tasks: Task[]
   getLoadData: ()=>void
 }
 
 export default function TodoList({setFilter, filter, countTasks, tasks, getLoadData}:props){
 
   console.log(tasks)
-  async function handleDeleteTask(id) {
+  async function handleDeleteTask(id: number) {
     try{
         await deleteTask(id);
         await getLoadData();

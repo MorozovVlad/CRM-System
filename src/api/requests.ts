@@ -1,4 +1,4 @@
-import { NewTask } from "../types/newTask";
+import { NewTask } from "../types/types";
 
 export async function getTasks(filter: string) {
     let request = filter == "all" ? "https://easydev.club/api/v1/todos" : `https://easydev.club/api/v1/todos?filter=${filter}`

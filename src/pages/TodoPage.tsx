@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-// import "../styles/index.css";
 import TodoList from "../components/TodoList";
 import AddTask from "../components/AddTask";
 import {
   getTasks,
-  addTask
 } from "../api/requests";
+import { Task, CountTask } from "../types/types";
 
 export default function TodoPage() {
-  const [tasks, setTasks] = useState([]);
-  const [countTasks, setCountTasks] = useState({});
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [countTasks, setCountTasks] = useState<CountTask>({all: 0, completed: 0, inWork: 0});
   const [filter, setFilter] = useState("all");
 
   useEffect(() => {
