@@ -17,3 +17,11 @@ export type CountTask = {
 }
 
 export type TaskFilter = "all" | "inWork" | "completed" 
+
+export type TasksResponse = {
+  data: Task[];
+  info: CountTask;
+  meta: {
+    totalAmount: number;
+  };
+};

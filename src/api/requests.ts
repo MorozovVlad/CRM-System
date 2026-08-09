@@ -1,6 +1,6 @@
-import { NewTask, TaskFilter } from "../types/types";
+import { NewTask, TaskFilter, TasksResponse } from "../types/types";
 
-export async function getTasks(filter: TaskFilter) {
+export async function getTasks(filter: TaskFilter) : Promise<TasksResponse> {
   let request =
     filter == "all"
       ? "https://easydev.club/api/v1/todos"
