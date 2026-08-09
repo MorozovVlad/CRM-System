@@ -4,7 +4,7 @@ import { deleteTask, editTask } from "../api/requests";
 import { Task, CountTask, TaskFilter } from "../types/types";
 
 
-type props = {
+type Props = {
   setFilter: (filter: TaskFilter) => void;
   filter: string;
   countTasks: CountTask;
@@ -12,7 +12,7 @@ type props = {
   getLoadData: () => void;
 };
 
-export default function TodoList({setFilter, filter, countTasks, tasks, getLoadData}:props){
+export default function TodoList({setFilter, filter, countTasks, tasks, getLoadData}:Props){
 
   console.log(tasks)
   async function handleDeleteTask(id: number) {

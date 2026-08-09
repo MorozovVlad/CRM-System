@@ -6,13 +6,13 @@ import DeleteButton from "../icons/DeleteButton";
 import { validateTaskTitle } from '../helpers/validateTaskTitle';
 import {Task} from "../types/types";
 
-type props = {
+type Props = {
   handleEditTask: (id: number, newTitle: string, isDone: boolean)=> void
   task: Task
   handleDeleteTask: (id: number)=>void
 }
 
-export default function TodoItem({handleEditTask, task, handleDeleteTask}: props){
+export default function TodoItem({handleEditTask, task, handleDeleteTask}: Props){
 
     const [currentTitle, setCurrentTitle] = useState(task.title)
     const [isEdit, setIsEdit] = useState(false)

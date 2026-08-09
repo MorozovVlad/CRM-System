@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react'
 import { addTask } from '../api/requests';
 import { validateTaskTitle } from '../helpers/validateTaskTitle';
 
-type props = {
+type Props = {
   getLoadData: ()=>void
 }
 
-export default function AddTask({ getLoadData }:props) {
+export default function AddTask({ getLoadData }:Props) {
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [isError, setIsError] = useState(false);
 
