@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react"
 import TodoItem from "./TodoItem"
 import { deleteTask, editTask } from "../api/requests";
-import {Task, CountTask} from "../types/types";
+import { Task, CountTask, TaskFilter } from "../types/types";
+
 
 type props = {
-  setFilter: (filter: string)=> void
-  filter: string
-  countTasks: CountTask
-  tasks: Task[]
-  getLoadData: ()=>void
-}
+  setFilter: (filter: TaskFilter) => void;
+  filter: string;
+  countTasks: CountTask;
+  tasks: Task[];
+  getLoadData: () => void;
+};
 
 export default function TodoList({setFilter, filter, countTasks, tasks, getLoadData}:props){
 

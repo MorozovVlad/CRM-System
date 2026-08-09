@@ -15,3 +15,5 @@ export type CountTask = {
     completed: number
     inWork: number
 }
+
+export type TaskFilter = "all" | "inWork" | "completed" 
