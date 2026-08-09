@@ -33,7 +33,7 @@ export default function AddTask({ getLoadData }:Props) {
   return (
     <div className="add-task">
       <form className='add-task-main' onSubmit={(e)=>{
-        e.preventDefault()
+        (e.preventDefault(), handleAddTask(newTaskTitle));
       }}>
         <input
           placeholder="Task To Be Done..."
@@ -45,9 +45,6 @@ export default function AddTask({ getLoadData }:Props) {
         <button
           type="submit"
           className="button-input"
-          onClick={() => {
-            (handleAddTask(newTaskTitle));
-          }}
         >
           Add
         </button>
