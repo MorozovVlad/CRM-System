@@ -1,14 +1,17 @@
-import { NewTask } from "../types/types";
+import { NewTask, TaskFilter } from "../types/types";
 
-export async function getTasks(filter: string) {
-    let request = filter == "all" ? "https://easydev.club/api/v1/todos" : `https://easydev.club/api/v1/todos?filter=${filter}`
+export async function getTasks(filter: TaskFilter) {
+  let request =
+    filter == "all"
+      ? "https://easydev.club/api/v1/todos"
+      : `https://easydev.club/api/v1/todos?filter=${filter}`;
 
-    const data = await fetch(request)
-    if(!data.ok){
-        throw new Error();
-    }
-    const dataJson = await data.json()
-    return dataJson
+  const data = await fetch(request);
+  if (!data.ok) {
+    throw new Error();
+  }
+  const dataJson = await data.json();
+  return dataJson;
 }
     
 export async function addTask(newTask: NewTask) {
