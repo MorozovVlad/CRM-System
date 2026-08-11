@@ -28,7 +28,13 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}: Props
 
     return(
         <>
-            <form className="todo-item">
+            <form className="todo-item" onSubmit={(e)=>{
+                e.preventDefault()
+                setIsEdit(false);
+                if(!isError){
+                    handleEditTask(task.id, currentTitle, task.isDone);
+                }
+            }}>
                 <div className="round">
                     <input className="round-checkbox" id={String(task.id)} checked={task.isDone} onChange={() => handleEditTask(task.id, currentTitle, !task.isDone)} type="checkbox"/>
                     <label htmlFor={String(task.id)}></label>
@@ -38,12 +44,7 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}: Props
                 {!isEdit && <button onClick={() => setIsEdit(true)}>
                     <EditButton/>
                 </button>}
-                {isEdit && <button type="submit" onClick={() => {     
-                                                                    setIsEdit(false);
-                                                                    if(!isError){
-                                                                        handleEditTask(task.id, currentTitle, task.isDone);
-                                                                    }
-                                                                }}>
+                {isEdit && <button type="submit">
                     <SaveButton/>             
                 </button>}
                 {isEdit && <button onClick={() => {setIsEdit(false), setCurrentTitle(task.title)}}>
