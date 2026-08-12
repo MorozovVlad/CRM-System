@@ -1,4 +1,4 @@
-import { NewTask, TaskFilter, TasksResponse } from "../types/types";
+import { NewTodo, TaskFilter, TasksResponse } from "../types/types";
 
 export async function getTasks(filter: TaskFilter) : Promise<TasksResponse> {
   let request =
@@ -14,7 +14,7 @@ export async function getTasks(filter: TaskFilter) : Promise<TasksResponse> {
   return dataJson;
 }
     
-export async function addTask(newTask: NewTask) {
+export async function addTask(newTask: NewTodo) {
     const data = await fetch('https://easydev.club/api/v1/todos',{
         method: 'POST',
             body: JSON.stringify(newTask)
@@ -33,7 +33,7 @@ export async function deleteTask(id:number) {
     }
 }
 
-export async function editTask(newTask: NewTask, id:number) {
+export async function editTask(newTask: NewTodo, id:number) {
     const data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
         method: "PUT",
         body: JSON.stringify(newTask)

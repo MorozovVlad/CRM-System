@@ -7,7 +7,7 @@ type Props = {
 }
 
 export default function AddTask({ getLoadData }:Props) {
-  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [newTaskTitle, setNewTodoTitle] = useState("");
   const [isError, setIsError] = useState(false);
 
   async function handleAddTask(newTaskTitle: string) {
@@ -20,7 +20,7 @@ export default function AddTask({ getLoadData }:Props) {
       isDone: false,
     };
     try {
-      setNewTaskTitle("")
+      setNewTodoTitle("")
       setIsError(false)
       await addTask(newTask);
       await getLoadData();
@@ -36,9 +36,9 @@ export default function AddTask({ getLoadData }:Props) {
         (e.preventDefault(), handleAddTask(newTaskTitle));
       }}>
         <input
-          placeholder="Task To Be Done..."
+          placeholder="Todo To Be Done..."
           className="input-task"
-          onChange={(e) => setNewTaskTitle(e.target.value)}
+          onChange={(e) => setNewTodoTitle(e.target.value)}
           value={newTaskTitle}
           
         />

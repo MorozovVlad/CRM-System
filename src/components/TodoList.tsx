@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react"
 import TodoItem from "./TodoItem"
 import { deleteTask, editTask } from "../api/requests";
-import { Task, CountTask, TaskFilter } from "../types/types";
+import { Todo, TodoInfo, TaskFilter } from "../types/types";
 
 
 type Props = {
   setFilter: (filter: TaskFilter) => void;
   filter: string;
-  countTasks: CountTask;
-  tasks: Task[];
+  TodoInfo: TodoInfo;
+  tasks: Todo[];
   getLoadData: () => void;
 };
 
-export default function TodoList({setFilter, filter, countTasks, tasks, getLoadData}:Props){
+export default function TodoList({setFilter, filter, TodoInfo, tasks, getLoadData}:Props){
 
   console.log(tasks)
   async function handleDeleteTask(id: number) {
@@ -48,7 +48,7 @@ export default function TodoList({setFilter, filter, countTasks, tasks, getLoadD
               setFilter("all");
             }}
           >
-            Все ({countTasks.all})
+            Все ({TodoInfo.all})
           </button>
           <button
             className={
@@ -58,7 +58,7 @@ export default function TodoList({setFilter, filter, countTasks, tasks, getLoadD
               setFilter("inWork");
             }}
           >
-            в работе ({countTasks.inWork})
+            в работе ({TodoInfo.inWork})
           </button>
           <button
             className={
@@ -68,7 +68,7 @@ export default function TodoList({setFilter, filter, countTasks, tasks, getLoadD
               setFilter("completed");
             }}
           >
-            сделано ({countTasks.completed})
+            сделано ({TodoInfo.completed})
           </button>
         </div>
         {tasks.map((task) => {

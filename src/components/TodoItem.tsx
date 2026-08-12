@@ -4,11 +4,11 @@ import SaveButton from "../icons/SaveButton";
 import CloseButton from "../icons/CloseButton";
 import DeleteButton from "../icons/DeleteButton";
 import { validateTaskTitle } from '../helpers/validateTaskTitle';
-import {Task} from "../types/types";
+import {Todo} from "../types/types";
 
 type Props = {
   handleEditTask: (id: number, newTitle: string, isDone: boolean)=> void
-  task: Task
+  task: Todo
   handleDeleteTask: (id: number)=>void
 }
 

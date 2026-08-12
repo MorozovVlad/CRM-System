@@ -1,16 +1,16 @@
-export type NewTask = {
+export type NewTodo = {
     isDone: boolean
     title: string
 }
 
-export type Task = {
+export type Todo = {
     id: number
     title: string
     created: string
     isDone: boolean
 }
 
-export type CountTask = {
+export type TodoInfo = {
     all: number
     completed: number
     inWork: number
@@ -19,8 +19,8 @@ export type CountTask = {
 export type TaskFilter = "all" | "inWork" | "completed" 
 
 export type TasksResponse = {
-  data: Task[];
-  info: CountTask;
+  data: Todo[];
+  info: TodoInfo;
   meta: {
     totalAmount: number;
   };

@@ -4,11 +4,11 @@ import AddTask from "../components/AddTask";
 import {
   getTasks,
 } from "../api/requests";
-import { Task, CountTask, TaskFilter } from "../types/types";
+import { Todo, TodoInfo, TaskFilter } from "../types/types";
 
 export default function TodoPage() {
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [countTasks, setCountTasks] = useState<CountTask>({all: 0, completed: 0, inWork: 0});
+  const [tasks, setTasks] = useState<Todo[]>([]);
+  const [TodoInfo, setTodoInfo] = useState<TodoInfo>({all: 0, completed: 0, inWork: 0});
   const [filter, setFilter] = useState<TaskFilter>("all");
 
   useEffect(() => {
@@ -19,7 +19,7 @@ export default function TodoPage() {
     try{
         const data = await getTasks(filter ?? "all");
         setTasks(data.data);
-        setCountTasks(data.info);
+        setTodoInfo(data.info);
     }catch(err){
         alert("Не удалось загрузить данные");
     }
@@ -33,7 +33,7 @@ export default function TodoPage() {
         getLoadData={getLoadData}
         filter={filter}
         setFilter={setFilter}
-        countTasks={countTasks}
+        TodoInfo={TodoInfo}
         tasks={tasks}
       />
     </div>
