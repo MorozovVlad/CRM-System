@@ -14,7 +14,6 @@ type Props = {
 
 export default function TodoList({setFilter, filter, TodoInfo, tasks, getLoadData}:Props){
 
-  console.log(tasks)
   async function handleDeleteTask(id: number) {
     try{
         await deleteTask(id);
