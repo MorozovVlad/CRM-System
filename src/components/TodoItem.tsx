@@ -26,15 +26,17 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}: Props
         }
     }, [currentTitle])
 
+    const handleSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        setIsEdit(false);
+        if(!isError){
+            handleEditTask(task.id, currentTitle, task.isDone);
+        }    
+    }
+
     return(
         <>
-            <form className="todo-item" onSubmit={(e)=>{
-                e.preventDefault()
-                setIsEdit(false);
-                if(!isError){
-                    handleEditTask(task.id, currentTitle, task.isDone);
-                }
-            }}>
+            <form className="todo-item" onSubmit={handleSubmit}>
                 <div className="round">
                     <input className="round-checkbox" id={String(task.id)} checked={task.isDone} onChange={() => handleEditTask(task.id, currentTitle, !task.isDone)} type="checkbox"/>
                     <label htmlFor={String(task.id)}></label>
