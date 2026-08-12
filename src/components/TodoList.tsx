@@ -6,7 +6,7 @@ import { Todo, TodoInfo, TaskFilter } from "../types/types";
 
 type Props = {
   setFilter: (filter: TaskFilter) => void;
-  filter: string;
+  filter: TaskFilter;
   TodoInfo: TodoInfo;
   tasks: Todo[];
   getLoadData: () => void;
