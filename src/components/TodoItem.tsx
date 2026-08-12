@@ -39,18 +39,28 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}: Props
                     <input className="round-checkbox" id={String(task.id)} checked={task.isDone} onChange={() => handleEditTask(task.id, currentTitle, !task.isDone)} type="checkbox"/>
                     <label htmlFor={String(task.id)}></label>
                 </div>
-                {!isEdit && <p className={String(task.isDone && "task-isDone")}>{task.title}</p>}         
-                {isEdit && <input value={currentTitle} onChange={e => {setCurrentTitle(e.target.value)}}/>}
-                {!isEdit && <button onClick={() => setIsEdit(true)}>
-                    <EditButton/>
-                </button>}
-                {isEdit && <button type="submit">
-                    <SaveButton/>             
-                </button>}
-                {isEdit && <button onClick={() => {setIsEdit(false), setCurrentTitle(task.title)}}>
-                    <CloseButton/>
-                </button>}
-                <button className="red-button" onClick={() => handleDeleteTask(task.id)}>
+
+                {!isEdit && 
+                    <>
+                        <p className={String(task.isDone && "task-isDone")}>{task.title}</p>
+                        <button type="button" onClick={() => setIsEdit(true)}>
+                            <EditButton/>
+                        </button>
+                    </>
+                }
+                {isEdit &&
+                    <>
+                        <input value={currentTitle} onChange={e => {setCurrentTitle(e.target.value)}}/>
+                        <button type="submit">
+                            <SaveButton/>             
+                        </button>
+                        <button type="button" onClick={() => {setIsEdit(false), setCurrentTitle(task.title)}}>
+                            <CloseButton/>
+                        </button>
+                    </>                 
+                }
+
+                <button type="button" className="red-button" onClick={() => handleDeleteTask(task.id)}>
                     <DeleteButton/>
                 </button>
             </form >
