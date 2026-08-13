@@ -137,6 +137,6 @@ button:hover{
 .todo-item p{
   margin: 0;
 }
-.red-button{
-  background-color: #ff6756 !important;
+.todo-item button.red-button{
+  background-color: #ff6756 ;
 }
