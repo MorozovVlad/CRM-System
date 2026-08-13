@@ -1,5 +1,8 @@
 body{
-  background-color: #f1f4f9;
+  --bg-color: #f1f4f9;
+  --button-color: #5393ff;
+  --gray: #909091;
+  background-color: var(--bg-color);
   font-family: Arial, sans-serif;
 }
 .main{
@@ -22,11 +25,11 @@ body{
   padding: 10px;
   border: 0px;
   border-bottom: 2px #dadde4 solid;
-  background-color: #f1f4f9;
+  background-color: var(--bg-color);
 }
 .button-input{
   width: 25%;
-  background-color: #5393ff;
+  background-color: var(--button-color);
   border-radius: 10px;
   border: 0px;
   color: white;
@@ -44,7 +47,7 @@ body{
   background-color: transparent;
   border: 0px;
   font-size: 25px;
-  color: #909091;
+  color: var(--gray);
 }
 .button-filter-selected{
   background-color: transparent;
@@ -78,7 +81,7 @@ button:hover{
   height: 40px;
   border-radius: 5px;
   border: 0px;
-  background-color: #5393ff;
+  background-color: var(--button-color);
   width: 60px;
 }
 .todo-item input{
@@ -120,15 +123,15 @@ button:hover{
 }
 
 .round input[type="checkbox"]:checked + label {
-  background-color: #5393ff;
-  border-color: #5393ff;
+  background-color: var(--button-color)s;
+  border-color: var(--button-color);
 }
 
 .round input[type="checkbox"]:checked + label:after {
   opacity: 1;
 }
 .task-isDone{
-  color: #909091;
+  color: var(--gray);
   text-decoration: line-through;
 }
 .todo-item p{
