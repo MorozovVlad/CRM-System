@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
 import TodoItem from "./TodoItem"
 import { deleteTask, editTask } from "../api/requests";
 import { Todo, TodoInfo, TaskFilter } from "../types/types";
+import TodoFilters from "./TodoFilters";
 
 
 type Props = {
@@ -38,38 +38,11 @@ export default function TodoList({setFilter, filter, TodoInfo, tasks, getLoadDat
 
     return (
       <>
-        <div className="buttons">
-          <button
-            className={
-              filter === "all" ? "button-filter-selected" : "button-filter"
-            }
-            onClick={() => {
-              setFilter("all");
-            }}
-          >
-            Все ({TodoInfo.all})
-          </button>
-          <button
-            className={
-              filter === "inWork" ? "button-filter-selected" : "button-filter"
-            }
-            onClick={() => {
-              setFilter("inWork");
-            }}
-          >
-            в работе ({TodoInfo.inWork})
-          </button>
-          <button
-            className={
-              filter === "completed" ? "button-filter-selected" : "button-filter"
-            }
-            onClick={() => {
-              setFilter("completed");
-            }}
-          >
-            сделано ({TodoInfo.completed})
-          </button>
-        </div>
+        <TodoFilters
+          setFilter={setFilter}
+          filter={filter}
+          TodoInfo={TodoInfo}
+        />
         {tasks.map((task) => {
           return (
             <TodoItem
