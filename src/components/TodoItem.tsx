@@ -3,23 +3,23 @@ import EditButton from "../icons/EditButton";
 import SaveButton from "../icons/SaveButton";
 import CloseButton from "../icons/CloseButton";
 import DeleteButton from "../icons/DeleteButton";
-import { validateTaskTitle } from '../helpers/validateTaskTitle';
+import { validateTodoTitle } from '../helpers/validateTodoTitle';
 import {Todo} from "../types/types";
 
 type Props = {
-  handleEditTask: (id: number, newTitle: string, isDone: boolean)=> void
-  task: Todo
-  handleDeleteTask: (id: number)=>void
+  handleEditTodo: (id: number, newTitle: string, isDone: boolean)=> void
+  todo: Todo
+  handleDeleteTodo: (id: number)=>void
 }
 
-export default function TodoItem({handleEditTask, task, handleDeleteTask}: Props){
+export default function TodoItem({handleEditTodo, todo, handleDeleteTodo}: Props){
 
-    const [currentTitle, setCurrentTitle] = useState(task.title)
+    const [currentTitle, setCurrentTitle] = useState(todo.title)
     const [isEdit, setIsEdit] = useState(false)
     const [isError, setIsError] = useState(false)
 
     useEffect(()=>{
-        if(validateTaskTitle(currentTitle)){
+        if(validateTodoTitle(currentTitle)){
             setIsError(true)
         }else{
             setIsError(false)
@@ -30,7 +30,7 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}: Props
         e.preventDefault();
         setIsEdit(false);
         if(!isError){
-            handleEditTask(task.id, currentTitle, task.isDone);
+            handleEditTodo(todo.id, currentTitle, todo.isDone);
         }    
     }
 
@@ -38,13 +38,13 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}: Props
         <>
             <form className="todo-item" onSubmit={handleSubmit}>
                 <div className="round">
-                    <input className="round-checkbox" id={String(task.id)} checked={task.isDone} onChange={() => handleEditTask(task.id, currentTitle, !task.isDone)} type="checkbox"/>
-                    <label htmlFor={String(task.id)}></label>
+                    <input className="round-checkbox" id={String(todo.id)} checked={todo.isDone} onChange={() => handleEditTodo(todo.id, currentTitle, !todo.isDone)} type="checkbox"/>
+                    <label htmlFor={String(todo.id)}></label>
                 </div>
 
                 {!isEdit && 
                     <>
-                        <p className={String(task.isDone && "task-isDone")}>{task.title}</p>
+                        <p className={`${String(todo.isDone && "todo-isDone")} todo-item__title `}>{todo.title}</p>
                         <button type="button" onClick={() => setIsEdit(true)}>
                             <EditButton/>
                         </button>
@@ -52,17 +52,17 @@ export default function TodoItem({handleEditTask, task, handleDeleteTask}: Props
                 }
                 {isEdit &&
                     <>
-                        <input value={currentTitle} onChange={e => {setCurrentTitle(e.target.value)}}/>
+                        <input className="todo-item__input-todo" value={currentTitle} onChange={e => {setCurrentTitle(e.target.value)}}/>
                         <button type="submit">
                             <SaveButton/>             
                         </button>
-                        <button type="button" onClick={() => {setIsEdit(false), setCurrentTitle(task.title)}}>
+                        <button type="button" onClick={() => {setIsEdit(false), setCurrentTitle(todo.title)}}>
                             <CloseButton/>
                         </button>
                     </>                 
                 }
 
-                <button type="button" className="red-button" onClick={() => handleDeleteTask(task.id)}>
+                <button type="button" className="red-button" onClick={() => handleDeleteTodo(todo.id)}>
                     <DeleteButton/>
                 </button>
             </form >

@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import TodoList from "../components/TodoList";
-import AddTask from "../components/AddTask";
+import AddTodo from "../components/AddTodo";
 import {
-  getTasks,
+  getTodos,
 } from "../api/requests";
-import { Todo, TodoInfo, TaskFilter } from "../types/types";
+import { Todo, TodoInfo, TodoFilter } from "../types/types";
 
 export default function TodoPage() {
-  const [tasks, setTasks] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([]);
   const [TodoInfo, setTodoInfo] = useState<TodoInfo>({all: 0, completed: 0, inWork: 0});
-  const [filter, setFilter] = useState<TaskFilter>("all");
+  const [filter, setFilter] = useState<TodoFilter>("all");
 
   useEffect(() => {
     getLoadData();
@@ -17,8 +17,8 @@ export default function TodoPage() {
 
   async function getLoadData() {
     try{
-        const data = await getTasks(filter ?? "all");
-        setTasks(data.data);
+        const data = await getTodos(filter ?? "all");
+        setTodos(data.data);
         setTodoInfo(data.info);
     }catch(err){
         alert("Не удалось загрузить данные");
@@ -28,13 +28,13 @@ export default function TodoPage() {
 
   return (
     <div className="main">
-      <AddTask getLoadData={ getLoadData } />
+      <AddTodo getLoadData={ getLoadData } />
       <TodoList
         getLoadData={getLoadData}
         filter={filter}
         setFilter={setFilter}
         TodoInfo={TodoInfo}
-        tasks={tasks}
+        todos={todos}
       />
     </div>
   );

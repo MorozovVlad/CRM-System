@@ -16,9 +16,9 @@ export type TodoInfo = {
     inWork: number
 }
 
-export type TaskFilter = "all" | "inWork" | "completed" 
+export type TodoFilter = "all" | "inWork" | "completed" 
 
-export type TasksResponse = {
+export type TodosResponse = {
   data: Todo[];
   info: TodoInfo;
   meta: {

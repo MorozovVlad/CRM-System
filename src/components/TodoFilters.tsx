@@ -1,8 +1,8 @@
-import { TodoInfo, TaskFilter } from "../types/types";
+import { TodoInfo, TodoFilter } from "../types/types";
 
 type Props = {
-  setFilter: (filter: TaskFilter) => void;
-  filter: TaskFilter;
+  setFilter: (filter: TodoFilter) => void;
+  filter: TodoFilter;
   TodoInfo: TodoInfo;
 };
 

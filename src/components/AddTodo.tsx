@@ -1,28 +1,28 @@
 import { useState, useEffect } from 'react'
-import { addTask } from '../api/requests';
-import { validateTaskTitle } from '../helpers/validateTaskTitle';
+import { addTodo } from '../api/requests';
+import { validateTodoTitle } from '../helpers/validateTodoTitle';
 
 type Props = {
   getLoadData: ()=>void
 }
 
-export default function AddTask({ getLoadData }:Props) {
-  const [newTaskTitle, setNewTodoTitle] = useState("");
+export default function AddTodo({ getLoadData }:Props) {
+  const [newTodoTitle, setNewTodoTitle] = useState("");
   const [isError, setIsError] = useState(false);
 
-  async function handleAddTask(newTaskTitle: string) {
-    if (validateTaskTitle(newTaskTitle)) {
+  async function handleAddTodo(newTodoTitle: string) {
+    if (validateTodoTitle(newTodoTitle)) {
       setIsError(true)
       return;
     }
-    const newTask = {
-      title: newTaskTitle.trim(),
+    const newTodo = {
+      title: newTodoTitle.trim(),
       isDone: false,
     };
     try {
       setNewTodoTitle("")
       setIsError(false)
-      await addTask(newTask);
+      await addTodo(newTodo);
       await getLoadData();
     } catch (err) {
       alert("Не удалось добавить задачу");
@@ -31,15 +31,15 @@ export default function AddTask({ getLoadData }:Props) {
 
 
   return (
-    <div className="add-task">
-      <form className='add-task-main' onSubmit={(e)=>{
-        (e.preventDefault(), handleAddTask(newTaskTitle));
+    <div className="add-todo">
+      <form className='add-todo-main' onSubmit={(e)=>{
+        (e.preventDefault(), handleAddTodo(newTodoTitle));
       }}>
         <input
           placeholder="Todo To Be Done..."
-          className="input-task"
+          className="input-todo"
           onChange={(e) => setNewTodoTitle(e.target.value)}
-          value={newTaskTitle}
+          value={newTodoTitle}
           
         />
         <button
@@ -49,7 +49,7 @@ export default function AddTask({ getLoadData }:Props) {
           Add
         </button>
       </form>
-      {isError && newTaskTitle.length>0 && <p className='error-message'>
+      {isError && newTodoTitle.length>0 && <p className='error-message'>
                 Длина задачи должна быть от 2 до 64 символов
       </p>}
     </div>

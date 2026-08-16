@@ -1,35 +1,35 @@
 import TodoItem from "./TodoItem"
-import { deleteTask, editTask } from "../api/requests";
-import { Todo, TodoInfo, TaskFilter } from "../types/types";
+import { deleteTodo, editTodo } from "../api/requests";
+import { Todo, TodoInfo, TodoFilter } from "../types/types";
 import TodoFilters from "./TodoFilters";
 
 
 type Props = {
-  setFilter: (filter: TaskFilter) => void;
-  filter: TaskFilter;
+  setFilter: (filter: TodoFilter) => void;
+  filter: TodoFilter;
   TodoInfo: TodoInfo;
-  tasks: Todo[];
+  todos: Todo[];
   getLoadData: () => void;
 };
 
-export default function TodoList({setFilter, filter, TodoInfo, tasks, getLoadData}:Props){
+export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadData}:Props){
 
-  async function handleDeleteTask(id: number) {
+  async function handleDeleteTodo(id: number) {
     try{
-        await deleteTask(id);
+        await deleteTodo(id);
         await getLoadData();
     }catch(err){
         alert("Не удалось удалить задачу")
     }
   }
 
-  async function handleEditTask(id: number, newTitle: string, isDone: boolean) {
-    const newTask = {
+  async function handleEditTodo(id: number, newTitle: string, isDone: boolean) {
+    const newTodo = {
       isDone: isDone,
       title: newTitle.trim(),
     };
     try{
-        await editTask(newTask, id);
+        await editTodo(newTodo, id);
         await getLoadData();
     }catch(err){
         alert("Не удалось редактировать задачу");
@@ -43,13 +43,13 @@ export default function TodoList({setFilter, filter, TodoInfo, tasks, getLoadDat
           filter={filter}
           TodoInfo={TodoInfo}
         />
-        {tasks.map((task) => {
+        {todos.map((todo) => {
           return (
             <TodoItem
-              handleEditTask={handleEditTask}
-              handleDeleteTask={handleDeleteTask}
-              key={task.id}
-              task={task}
+              handleEditTodo={handleEditTodo}
+              handleDeleteTodo={handleDeleteTodo}
+              key={todo.id}
+              todo={todo}
             />
           );
         })}

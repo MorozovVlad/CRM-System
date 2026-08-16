@@ -1,6 +1,6 @@
-import { NewTodo, TaskFilter, TasksResponse } from "../types/types";
+import { NewTodo, TodoFilter, TodosResponse } from "../types/types";
 
-export async function getTasks(filter: TaskFilter) : Promise<TasksResponse> {
+export async function getTodos(filter: TodoFilter) : Promise<TodosResponse> {
   let request =
     filter == "all"
       ? "https://easydev.club/api/v1/todos"
@@ -14,17 +14,17 @@ export async function getTasks(filter: TaskFilter) : Promise<TasksResponse> {
   return dataJson;
 }
     
-export async function addTask(newTask: NewTodo) {
+export async function addTodo(newTodo: NewTodo) {
     const data = await fetch('https://easydev.club/api/v1/todos',{
         method: 'POST',
-            body: JSON.stringify(newTask)
+            body: JSON.stringify(newTodo)
     })
     if (!data.ok) {
       throw new Error();
     }
 }
 
-export async function deleteTask(id:number) {
+export async function deleteTodo(id:number) {
     const data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
         method: 'DELETE',
     })
@@ -33,10 +33,10 @@ export async function deleteTask(id:number) {
     }
 }
 
-export async function editTask(newTask: NewTodo, id:number) {
+export async function editTodo(newTodo: NewTodo, id:number) {
     const data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
         method: "PUT",
-        body: JSON.stringify(newTask)
+        body: JSON.stringify(newTodo)
     })
     if (!data.ok) {
       throw new Error();
