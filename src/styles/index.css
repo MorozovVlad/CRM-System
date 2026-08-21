@@ -1,32 +1,35 @@
 body{
-  background-color: #f1f4f9;
+  --bg-color: #f1f4f9;
+  --button-color: #5393ff;
+  --gray: #909091;
+  background-color: var(--bg-color);
   font-family: Arial, sans-serif;
 }
 .main{
   width: 25%;
   margin:50px auto;
 }
-.add-task{
+.add-todo{
   display: flex;
   margin-bottom: 30px;
   flex-direction: column;
 }
-.add-task-main{
+.add-todo-main{
   display: flex;
   margin-bottom: 10px;
 }
-.input-task{
+.input-todo{
   font-size: 20px;
   width: 70%;
   margin-right: 5%;
   padding: 10px;
   border: 0px;
   border-bottom: 2px #dadde4 solid;
-  background-color: #f1f4f9;
+  background-color: var(--bg-color);
 }
 .button-input{
   width: 25%;
-  background-color: #5393ff;
+  background-color: var(--button-color);
   border-radius: 10px;
   border: 0px;
   color: white;
@@ -44,7 +47,7 @@ body{
   background-color: transparent;
   border: 0px;
   font-size: 25px;
-  color: #909091;
+  color: var(--gray);
 }
 .button-filter-selected{
   background-color: transparent;
@@ -66,22 +69,23 @@ button:hover{
   margin-top: 15px;
   box-shadow: 0px 20px 40px -10px rgba(34, 60, 80, 0.25);
 }
-.todo-item p{
+.todo-item__title{
   width: 70%;
   display: flex;
   align-items: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin: 0;
 }
 .todo-item button{
   height: 40px;
   border-radius: 5px;
   border: 0px;
-  background-color: #5393ff;
+  background-color: var(--button-color);
   width: 60px;
 }
-.todo-item input{
+.todo-item__input-todo{
   font-size: 20px;
   cursor: pointer;
 }
@@ -120,20 +124,17 @@ button:hover{
 }
 
 .round input[type="checkbox"]:checked + label {
-  background-color: #5393ff;
-  border-color: #5393ff;
+  background-color: var(--button-color);
+  border-color: var(--button-color);
 }
 
 .round input[type="checkbox"]:checked + label:after {
   opacity: 1;
 }
-.task-isDone{
-  color: #909091;
+.todo-isDone{
+  color: var(--gray);
   text-decoration: line-through;
 }
-.todo-item p{
-  margin: 0;
-}
-.red-button{
-  background-color: #ff6756 !important;
+.todo-item button.red-button{
+  background-color: #ff6756 ;
 }
