@@ -7,9 +7,32 @@ type Props = {
 };
 
 export default function TodoFilters({setFilter, filter, TodoInfo}: Props) {
+  console.log(TodoInfo);
+
+  const buttons = []
+
+  for (var key in TodoInfo){
+    
+    const filter = key as TodoFilter;
+
+    buttons.push(
+      <button
+        className="button-filter"
+        onClick={() => {
+          setFilter(filter);
+        }}
+      >
+        {key} {TodoInfo[filter]}
+      </button>,
+    );
+  }
+
+
   return (
     <div className="buttons">
-      <button
+      {buttons}
+
+      {/* <button
         className={
           filter === "all" ? "button-filter-selected" : "button-filter"
         }
@@ -38,7 +61,7 @@ export default function TodoFilters({setFilter, filter, TodoInfo}: Props) {
         }}
       >
         сделано ({TodoInfo.completed})
-      </button>
+      </button> */}
     </div>
   );
 }

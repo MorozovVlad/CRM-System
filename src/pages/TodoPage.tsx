@@ -4,7 +4,7 @@ import AddTodo from "../components/AddTodo";
 import {
   getTodos,
 } from "../api/requests";
-import { Todo, TodoInfo, TodoFilter } from "../types/types";
+import { Todo, TodoInfo, TodoFilter, TodoStatusCounts } from "../types/types";
 
 export default function TodoPage() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -19,7 +19,7 @@ export default function TodoPage() {
     todo: 0,
   });
   const [filter, setFilter] = useState<TodoFilter>("all");
-
+  console.log(filter)
   useEffect(() => {
     getLoadData();
   }, [filter]);
@@ -27,13 +27,19 @@ export default function TodoPage() {
   async function getLoadData() {
     try{
         const data = await getTodos(filter ?? "all");
+        let all = 0;
+        for(let key in data.meta.statusCounts){
+          all += data.meta.statusCounts[key as keyof TodoStatusCounts];
+        }
         setTodos(data.data);
-        setTodoInfo(data.meta.statusCounts);
+        setTodoInfo({all, ...data.meta.statusCounts});
+        
     }catch(err){
         alert("Не удалось загрузить данные");
     }
   }
 
+  console.log(TodoInfo);
 
   return (
     <div className="main">

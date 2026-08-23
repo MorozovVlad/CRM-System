@@ -4,7 +4,7 @@ export async function getTodos(filter: TodoFilter) : Promise<TodosResponse> {
   let request =
     filter == "all"
       ? "https://tech-mindset.ru/api/v1/tasks"
-      : `https://tech-mindset.ru/api/v1/tasks?filter=${filter}`;
+      : `https://tech-mindset.ru/api/v1/tasks?statuses=${filter}`;
 
   const data = await fetch(request);
   if (!data.ok) {

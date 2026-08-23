@@ -10,8 +10,8 @@ export type Todo = {
     isDone: boolean
 }
 
-export type TodoInfo = {
-  all: number;
+
+export type TodoStatusCounts = {
   backlog: number;
   done: number;
   inProgress: number;
@@ -19,6 +19,10 @@ export type TodoInfo = {
   readyForRelease: number;
   review: number;
   todo: number;
+};
+
+export type TodoInfo = TodoStatusCounts & {
+  all: number;
 };
 
 export type TodoFilter =
@@ -35,6 +39,6 @@ export type TodosResponse = {
   data: Todo[];
   total: number;
   meta: {
-    statusCounts: TodoInfo;
+    statusCounts: TodoStatusCounts;
   };
 };
