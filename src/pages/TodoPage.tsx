@@ -8,7 +8,16 @@ import { Todo, TodoInfo, TodoFilter } from "../types/types";
 
 export default function TodoPage() {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [TodoInfo, setTodoInfo] = useState<TodoInfo>({all: 0, completed: 0, inWork: 0});
+  const [TodoInfo, setTodoInfo] = useState<TodoInfo>({
+    all:0,
+    backlog: 0,
+    done: 0,
+    inProgress: 0,
+    onHold: 0,
+    readyForRelease: 0,
+    review: 0,
+    todo: 0,
+  });
   const [filter, setFilter] = useState<TodoFilter>("all");
 
   useEffect(() => {
@@ -19,7 +28,7 @@ export default function TodoPage() {
     try{
         const data = await getTodos(filter ?? "all");
         setTodos(data.data);
-        setTodoInfo(data.info);
+        setTodoInfo(data.meta.statusCounts);
     }catch(err){
         alert("Не удалось загрузить данные");
     }

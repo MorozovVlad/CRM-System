@@ -3,8 +3,8 @@ import { NewTodo, TodoFilter, TodosResponse } from "../types/types";
 export async function getTodos(filter: TodoFilter) : Promise<TodosResponse> {
   let request =
     filter == "all"
-      ? "https://easydev.club/api/v1/todos"
-      : `https://easydev.club/api/v1/todos?filter=${filter}`;
+      ? "https://tech-mindset.ru/api/v1/tasks"
+      : `https://tech-mindset.ru/api/v1/tasks?filter=${filter}`;
 
   const data = await fetch(request);
   if (!data.ok) {

@@ -11,17 +11,30 @@ export type Todo = {
 }
 
 export type TodoInfo = {
-    all: number
-    completed: number
-    inWork: number
-}
+  all: number;
+  backlog: number;
+  done: number;
+  inProgress: number;
+  onHold: number;
+  readyForRelease: number;
+  review: number;
+  todo: number;
+};
 
-export type TodoFilter = "all" | "inWork" | "completed" 
+export type TodoFilter =
+  | "all"
+  | "backlog"
+  | "done"
+  | "inProgress"
+  | "onHold"
+  | "readyForRelease"
+  | "review"
+  | "todo"; 
 
 export type TodosResponse = {
   data: Todo[];
-  info: TodoInfo;
+  total: number;
   meta: {
-    totalAmount: number;
+    statusCounts: TodoInfo;
   };
 };
