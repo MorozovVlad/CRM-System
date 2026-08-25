@@ -1,13 +1,19 @@
 export type NewTodo = {
-    isDone: boolean
-    title: string
+    isDone: boolean;
+    title: string;
 }
 
+export type Executor = {
+  id: number;
+  name: string;
+};
+
 export type Todo = {
-    id: number
-    title: string
-    created: string
-    isDone: boolean
+    id: number;
+    title: string;
+    status: string;
+    executor: Executor;
+    deadline: string;
 }
 
 

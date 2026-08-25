@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import TodoList from "../components/TodoList";
 import AddTodo from "../components/AddTodo";
+import TodoDetails from "../components/TodoDetails";
 import {
   getTodos,
 } from "../api/requests";
@@ -8,6 +9,7 @@ import { Todo, TodoInfo, TodoFilter, TodoStatusCounts } from "../types/types";
 
 export default function TodoPage() {
   const [todos, setTodos] = useState<Todo[]>([]);
+  
   const [TodoInfo, setTodoInfo] = useState<TodoInfo>({
     all:0,
     backlog: 0,
@@ -18,11 +20,25 @@ export default function TodoPage() {
     review: 0,
     todo: 0,
   });
+
   const [filter, setFilter] = useState<TodoFilter>("all");
-  console.log(filter)
+  console.log(todos)
+  const [selectedTodo, setSelectedTodo] = useState(0)
+
+  // console.log(filter)
+
   useEffect(() => {
     getLoadData();
   }, [filter]);
+
+
+  useEffect(() => {
+    if (todos.length > 0) {
+      setSelectedTodo(todos[0].id);
+    }
+  }, [todos]);
+
+  console.log(selectedTodo)
 
   async function getLoadData() {
     try{
@@ -43,7 +59,11 @@ export default function TodoPage() {
 
   return (
     <div className="main">
-      <AddTodo getLoadData={ getLoadData } />
+      {/* <AddTodo getLoadData={ getLoadData } /> */}
+      <TodoDetails
+        selectedTodo = {selectedTodo}
+        todos={todos}
+      />
       <TodoList
         getLoadData={getLoadData}
         filter={filter}
