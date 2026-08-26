@@ -60,15 +60,16 @@ export default function TodoPage() {
   return (
     <div className="main">
       {/* <AddTodo getLoadData={ getLoadData } /> */}
-      <TodoDetails
-        selectedTodo = {selectedTodo}
-        todos={todos}
-      />
       <TodoList
         getLoadData={getLoadData}
         filter={filter}
         setFilter={setFilter}
         TodoInfo={TodoInfo}
+        todos={todos}
+        setSelectedTodo={setSelectedTodo}
+      />
+      <TodoDetails
+        selectedTodo = {selectedTodo}
         todos={todos}
       />
     </div>

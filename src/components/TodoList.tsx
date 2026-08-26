@@ -10,6 +10,7 @@ type Props = {
   TodoInfo: TodoInfo;
   todos: Todo[];
   getLoadData: () => void;
+  setSelectedTodo: (todo: number) => void
 };
 
 const columns = [
@@ -46,7 +47,7 @@ const columns = [
 
  
 
-export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadData}:Props){
+export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadData, setSelectedTodo}:Props){
 
 
   const backlogTodos = todos
@@ -64,6 +65,10 @@ export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadDat
     }
   }
 
+  function handleSelectTodo(todo: Todo) {
+    setSelectedTodo(todo.id)
+  }
+
   async function handleEditTodo(id: number, newTitle: string, isDone: boolean) {
     const newTodo = {
       isDone: isDone,
@@ -78,7 +83,7 @@ export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadDat
   }
   console.log(todos)
     return (
-      <>
+      <div className="todoList">
         {/* <TodoFilters
           setFilter={setFilter}
           filter={filter}
@@ -86,10 +91,16 @@ export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadDat
         /> */}
         <p>Спринт {inSprintTodos.length} задач</p>
         <Table 
+          style={{ width: '100%' }}
           dataSource={inSprintTodos} 
           columns={columns} 
           pagination={false}
           showHeader={false}
+          onRow={(todo) => ({
+            onClick: () => {
+              handleSelectTodo(todo)
+            },
+          })}
         />
         <p>Бэклог: {backlogTodos.length} задач</p>
         <Table 
@@ -98,6 +109,6 @@ export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadDat
           pagination={false}
           showHeader={false}
         />
-      </>
+      </div>
     );
 }

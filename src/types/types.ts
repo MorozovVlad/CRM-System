@@ -8,12 +8,20 @@ export type Executor = {
   name: string;
 };
 
+export type Creator = {
+  id: number;
+  name: string;
+};
+
 export type Todo = {
     id: number;
     title: string;
     status: string;
     executor: Executor;
     deadline: string;
+    creator: Creator;
+    createdAt: string;
+    updatedAt: string;
 }
 
 

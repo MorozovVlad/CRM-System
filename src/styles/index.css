@@ -6,9 +6,31 @@ body{
   font-family: Arial, sans-serif;
 }
 .main{
-  width: 50%;
+  width: 70%;
   margin:50px auto;
+  display: flex;
+  gap: 50px;
 }
+
+.todoList{
+  width: 70%;
+}
+
+.todoDetails-title{
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.todoDetails-label{
+  color: rgb(107, 119, 140);
+  font-size: 12px;
+}
+.todoDetails-value{
+  font-size: 13px;
+  font-weight: 500px;
+  color: rgb(23, 43, 77);
+}
+
 .add-todo{
   display: flex;
   margin-bottom: 30px;
