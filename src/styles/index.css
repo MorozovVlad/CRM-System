@@ -24,11 +24,16 @@ body{
 .todoDetails-label{
   color: rgb(107, 119, 140);
   font-size: 12px;
+  width: 120px;
+  flex-shrink: 0;
 }
 .todoDetails-value{
   font-size: 13px;
   font-weight: 500px;
   color: rgb(23, 43, 77);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
 }
 
 .add-todo{
@@ -159,4 +164,12 @@ button:hover{
 }
 .todo-item button.red-button{
   background-color: #ff6756 ;
+}
+
+.todo-table .ant-table-tbody > tr:hover > td {
+  background: #ebecf0 !important;
+}
+
+.todo-table .ant-table-tbody > tr.selected-row > td {
+  background: #deebff !important;
 }

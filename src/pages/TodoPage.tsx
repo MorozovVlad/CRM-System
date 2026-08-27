@@ -10,6 +10,8 @@ import { Todo, TodoInfo, TodoFilter, TodoStatusCounts } from "../types/types";
 export default function TodoPage() {
   const [todos, setTodos] = useState<Todo[]>([]);
   
+  const[isEdit, setIsEdit] = useState<boolean>(false)
+
   const [TodoInfo, setTodoInfo] = useState<TodoInfo>({
     all:0,
     backlog: 0,
@@ -22,23 +24,17 @@ export default function TodoPage() {
   });
 
   const [filter, setFilter] = useState<TodoFilter>("all");
-  console.log(todos)
   const [selectedTodo, setSelectedTodo] = useState(0)
-
-  // console.log(filter)
 
   useEffect(() => {
     getLoadData();
   }, [filter]);
-
 
   useEffect(() => {
     if (todos.length > 0) {
       setSelectedTodo(todos[0].id);
     }
   }, [todos]);
-
-  console.log(selectedTodo)
 
   async function getLoadData() {
     try{
@@ -55,7 +51,7 @@ export default function TodoPage() {
     }
   }
 
-  console.log(TodoInfo);
+  console.log(isEdit);
 
   return (
     <div className="main">
@@ -67,10 +63,13 @@ export default function TodoPage() {
         TodoInfo={TodoInfo}
         todos={todos}
         setSelectedTodo={setSelectedTodo}
+        selectedTodo = {selectedTodo}
       />
       <TodoDetails
         selectedTodo = {selectedTodo}
         todos={todos}
+        isEdit={isEdit}
+        setIsEdit={setIsEdit}
       />
     </div>
   );

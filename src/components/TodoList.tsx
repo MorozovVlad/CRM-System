@@ -1,8 +1,9 @@
-import TodoItem from "./TodoItem"
+// import TodoItem from "./TodoItem"
 import { deleteTodo, editTodo } from "../api/requests";
 import { Todo, TodoInfo, TodoFilter } from "../types/types";
 import TodoFilters from "./TodoFilters";
 import { Table } from 'antd';
+import { Flex, Tag } from 'antd';
 
 type Props = {
   setFilter: (filter: TodoFilter) => void;
@@ -11,6 +12,7 @@ type Props = {
   todos: Todo[];
   getLoadData: () => void;
   setSelectedTodo: (todo: number) => void
+  selectedTodo: number;
 };
 
 const columns = [
@@ -30,6 +32,13 @@ const columns = [
     dataIndex: 'status',
     key: 'status',
     width: "15%",
+    render: (status: string) => (
+      <Tag 
+        style={{
+        width: 100,
+        textAlign: 'center',
+      }}>{status}</Tag>
+    ),
   },
   {
     title: 'executor',
@@ -42,12 +51,17 @@ const columns = [
     dataIndex: 'deadline',
     key: 'deadline',
     width: "20%",
+    render: (deadline: string)=>{
+      if(!deadline){
+        return "-"
+      }
+    }
   },
 ];
 
  
 
-export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadData, setSelectedTodo}:Props){
+export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadData, setSelectedTodo, selectedTodo}:Props){
 
 
   const backlogTodos = todos
@@ -91,11 +105,15 @@ export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadDat
         /> */}
         <p>Спринт {inSprintTodos.length} задач</p>
         <Table 
-          style={{ width: '100%' }}
+          className="todo-table"
+          style={{ width: '100%', cursor: "pointer"}}
           dataSource={inSprintTodos} 
           columns={columns} 
           pagination={false}
           showHeader={false}
+          rowClassName={(record) =>
+            record.id === selectedTodo ? 'selected-row' : ''
+          }
           onRow={(todo) => ({
             onClick: () => {
               handleSelectTodo(todo)
@@ -104,10 +122,16 @@ export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadDat
         />
         <p>Бэклог: {backlogTodos.length} задач</p>
         <Table 
+          style={{ width: '100%', cursor: "pointer"}}
           dataSource={backlogTodos} 
           columns={columns} 
           pagination={false}
           showHeader={false}
+          onRow={(todo) => ({
+            onClick: () => {
+              handleSelectTodo(todo)
+            },
+          })}
         />
       </div>
     );
