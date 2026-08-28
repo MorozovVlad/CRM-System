@@ -53,7 +53,7 @@ export default function TodoDetails({selectedTodo, todos, isEdit, setIsEdit}: Pr
 
     return(
         <div className="todoDetails">
-            <Dropdown menu={{ items }}  placement="bottomRight">
+            <Dropdown className="todoDetails-dropdown" menu={{ items }}  placement="bottomRight">
                 <Button icon={<EllipsisOutlined />} />
             </Dropdown>
             <p className="todoDetails-title">{todo?.title}</p>

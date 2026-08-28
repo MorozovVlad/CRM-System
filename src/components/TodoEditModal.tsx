@@ -30,7 +30,7 @@ export default function TodoEditModal({isModalOpen, handleOk, handleCancel}: Pro
             <p>* Описание</p>
             <TextArea  
                 placeholder='Опишите задачу, добавьте заголовки и списки...'
-                style={{ height: 120, resize: 'none' }}
+                style={{ height: 200, resize: 'none' }}
             />
             <div style={{display: "flex", gap: "12px"}}>
                 <div>
@@ -46,10 +46,11 @@ export default function TodoEditModal({isModalOpen, handleOk, handleCancel}: Pro
                     />
                 </div>
             </div>
-            <p>* Дедлайн</p>
+            <p>Дедлайн</p>
             <DatePicker  
                 showTime
                 onOk={onOk}
+                style={{ width: 712 }}
             />
 
         </Modal>

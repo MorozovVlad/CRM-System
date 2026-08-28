@@ -9,13 +9,27 @@ body{
   width: 70%;
   margin:50px auto;
   display: flex;
-  gap: 50px;
+  /* gap: 50px; */
 }
 
 .todoList{
   width: 70%;
+  border: 1px solid rgb(209, 209, 209);;
+  padding: 40px;
+  padding-top: 20px;
 }
-
+.todoDetails{
+  /* background-color: #ccc; */
+  height: 400px;
+  padding: 40px;
+  border: 1px solid rgb(209, 209, 209);
+  border-left: none;
+  display: flex;
+  flex-direction: column;
+}
+.todoDetails-dropdown{
+  margin-left: auto;
+}
 .todoDetails-title{
   font-weight: 600;
   font-size: 20px;
