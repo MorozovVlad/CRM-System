@@ -1,7 +1,6 @@
 // import TodoItem from "./TodoItem"
 import { deleteTodo, editTodo } from "../api/requests";
 import { Todo, TodoInfo, TodoFilter } from "../types/types";
-import TodoFilters from "./TodoFilters";
 import { Table } from 'antd';
 import { Flex, Tag } from 'antd';
 
@@ -98,11 +97,6 @@ export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadDat
   console.log(todos)
     return (
       <div className="todoList">
-        {/* <TodoFilters
-          setFilter={setFilter}
-          filter={filter}
-          TodoInfo={TodoInfo}
-        /> */}
         <p>Спринт {inSprintTodos.length} задач</p>
         <Table 
           className="todo-table"

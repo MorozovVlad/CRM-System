@@ -22,6 +22,7 @@ export type Todo = {
     creator: Creator;
     createdAt: string;
     updatedAt: string;
+    description: string
 }
 
 

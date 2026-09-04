@@ -1,4 +1,4 @@
-import { Todo, TodoInfo } from "../types/types";
+import { Todo, TodoInfo, TodoStatusCounts } from "../types/types";
 import { UserOutlined, CalendarOutlined, EllipsisOutlined  } from '@ant-design/icons';
 import { Button, Dropdown, Flex, Space } from 'antd';
 import TodoEditModal from "./TodoEditModal";
@@ -7,19 +7,13 @@ import { useState } from "react";
 type Props = {
     selectedTodo: number;
     todos: Todo[];
-    isEdit: boolean;
-    setIsEdit: (isEdit: boolean) => void
+    TodoInfo: TodoStatusCounts
+    getLoadData:() => void
 };
 
-export default function TodoDetails({selectedTodo, todos, isEdit, setIsEdit}: Props) {
-
-
+export default function TodoDetails({selectedTodo, todos, TodoInfo, getLoadData}: Props) {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
-    const handleOk = () => {
-        setIsModalOpen(false);
-    };
     
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -51,6 +45,10 @@ export default function TodoDetails({selectedTodo, todos, isEdit, setIsEdit}: Pr
 
     const todo = todos.find(todo => todo.id == selectedTodo)
 
+    if (!todo) {
+        return null
+    }
+
     return(
         <div className="todoDetails">
             <Dropdown className="todoDetails-dropdown" menu={{ items }}  placement="bottomRight">
@@ -72,8 +70,9 @@ export default function TodoDetails({selectedTodo, todos, isEdit, setIsEdit}: Pr
 
             <TodoEditModal 
                 isModalOpen = {isModalOpen}
-                handleOk = {handleOk}
                 handleCancel = {handleCancel}
+                todo={todo}
+                getLoadData={getLoadData}
             />
         </div>
         

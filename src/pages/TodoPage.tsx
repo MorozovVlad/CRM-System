@@ -3,7 +3,7 @@ import TodoList from "../components/TodoList";
 import AddTodo from "../components/AddTodo";
 import TodoDetails from "../components/TodoDetails";
 import {
-  getTodos,
+  getTodos
 } from "../api/requests";
 import { Todo, TodoInfo, TodoFilter, TodoStatusCounts } from "../types/types";
 
@@ -36,7 +36,10 @@ export default function TodoPage() {
     }
   }, [todos]);
 
+  // console.log(TodoInfo)
+
   async function getLoadData() {
+    console.log("1111111111111111111111111111111111111111111111111")
     try{
         const data = await getTodos(filter ?? "all");
         let all = 0;
@@ -51,11 +54,8 @@ export default function TodoPage() {
     }
   }
 
-  console.log(isEdit);
-
   return (
     <div className="main">
-      {/* <AddTodo getLoadData={ getLoadData } /> */}
       <TodoList
         getLoadData={getLoadData}
         filter={filter}
@@ -68,8 +68,8 @@ export default function TodoPage() {
       <TodoDetails
         selectedTodo = {selectedTodo}
         todos={todos}
-        isEdit={isEdit}
-        setIsEdit={setIsEdit}
+        TodoInfo={TodoInfo}
+        getLoadData={getLoadData}
       />
     </div>
   );
