@@ -1,13 +1,12 @@
-// import TodoItem from "./TodoItem"
-import { deleteTodo, editTodo } from "../api/requests";
+import { deleteTodo, addTodo } from "../api/requests";
 import { Todo, TodoInfo, TodoFilter } from "../types/types";
 import { Table } from 'antd';
-import { Flex, Tag } from 'antd';
+import { Tag } from 'antd';
+import { useState } from "react";
+import TodoModal from "./TodoModal";
+import { Button } from "antd";
 
 type Props = {
-  setFilter: (filter: TodoFilter) => void;
-  filter: TodoFilter;
-  TodoInfo: TodoInfo;
   todos: Todo[];
   getLoadData: () => void;
   setSelectedTodo: (todo: number) => void
@@ -58,75 +57,76 @@ const columns = [
   },
 ];
 
- 
 
-export default function TodoList({setFilter, filter, TodoInfo, todos, getLoadData, setSelectedTodo, selectedTodo}:Props){
+export default function TodoList({ todos, getLoadData, setSelectedTodo, selectedTodo}:Props){
+  const backlogTodos = todos.filter((todo) => todo.status == "backlog");
 
+  const inSprintTodos = todos.filter((todo) => todo.status != "backlog");
 
-  const backlogTodos = todos
-    .filter(todo => todo.status == 'backlog' )
-
-  const inSprintTodos = todos
-    .filter(todo => todo.status != 'backlog' )
-
-  async function handleDeleteTodo(id: number) {
-    try{
-        await deleteTodo(id);
-        await getLoadData();
-    }catch(err){
-        alert("Не удалось удалить задачу")
-    }
-  }
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
 
   function handleSelectTodo(todo: Todo) {
-    setSelectedTodo(todo.id)
+    setSelectedTodo(todo.id);
   }
 
-  async function handleEditTodo(id: number, newTitle: string, isDone: boolean) {
+  async function handleModalTodo(currentTodo: Todo) {
     const newTodo = {
-      isDone: isDone,
-      title: newTitle.trim(),
+      title: currentTodo?.title,
+      description: currentTodo?.description,
+      executorId: 1,
+      status: currentTodo?.status,
+      deadline: currentTodo?.deadline,
     };
-    try{
-        await editTodo(newTodo, id);
-        await getLoadData();
-    }catch(err){
-        alert("Не удалось редактировать задачу");
-    }
+    await addTodo(newTodo);
+    await getLoadData();
+    setIsModalOpen(false);
   }
-  console.log(todos)
-    return (
-      <div className="todoList">
-        <p>Спринт {inSprintTodos.length} задач</p>
-        <Table 
-          className="todo-table"
-          style={{ width: '100%', cursor: "pointer"}}
-          dataSource={inSprintTodos} 
-          columns={columns} 
-          pagination={false}
-          showHeader={false}
-          rowClassName={(record) =>
-            record.id === selectedTodo ? 'selected-row' : ''
-          }
-          onRow={(todo) => ({
-            onClick: () => {
-              handleSelectTodo(todo)
-            },
-          })}
-        />
-        <p>Бэклог: {backlogTodos.length} задач</p>
-        <Table 
-          style={{ width: '100%', cursor: "pointer"}}
-          dataSource={backlogTodos} 
-          columns={columns} 
-          pagination={false}
-          showHeader={false}
-          onRow={(todo) => ({
-            onClick: () => {
-              handleSelectTodo(todo)
-            },
-          })}
-        />
-      </div>
-    );
+
+  console.log(todos);
+  return (
+    <div className="todoList">
+      <Button onClick={() => setIsModalOpen(true)} type="primary">
+        Добавить
+      </Button>
+      <p>Спринт {inSprintTodos.length} задач</p>
+      <Table
+        className="todo-table"
+        style={{ width: "100%", cursor: "pointer" }}
+        dataSource={inSprintTodos}
+        columns={columns}
+        pagination={false}
+        showHeader={false}
+        rowClassName={(record) =>
+          record.id === selectedTodo ? "selected-row" : ""
+        }
+        onRow={(todo) => ({
+          onClick: () => {
+            handleSelectTodo(todo);
+          },
+        })}
+      />
+      <p>Бэклог: {backlogTodos.length} задач</p>
+      <Table
+        style={{ width: "100%", cursor: "pointer" }}
+        dataSource={backlogTodos}
+        columns={columns}
+        pagination={false}
+        showHeader={false}
+        onRow={(todo) => ({
+          onClick: () => {
+            handleSelectTodo(todo);
+          },
+        })}
+      />
+
+      <TodoModal
+        titleModal="Добавить задачу"
+        isModalOpen={isModalOpen}
+        handleCancel={setIsModalOpen}
+        getLoadData={getLoadData}
+        handleModalTodo={handleModalTodo}
+      />
+    </div>
+  );
 }

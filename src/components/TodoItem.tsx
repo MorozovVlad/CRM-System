@@ -8,12 +8,12 @@ import {Todo} from "../types/types";
 import { Button, Form, Input } from "antd";
 
 type Props = {
-  handleEditTodo: (id: number, newTitle: string, isDone: boolean)=> void
+  handleModalTodo: (id: number, newTitle: string, isDone: boolean)=> void
   todo: Todo
   handleDeleteTodo: (id: number)=>void
 }
 
-export default function TodoItem({handleEditTodo, todo, handleDeleteTodo}: Props){
+export default function TodoItem({handleModalTodo, todo, handleDeleteTodo}: Props){
 
     const [currentTitle, setCurrentTitle] = useState(todo.title)
     const [isEdit, setIsEdit] = useState(false)
@@ -31,7 +31,7 @@ export default function TodoItem({handleEditTodo, todo, handleDeleteTodo}: Props
         e.preventDefault();
         setIsEdit(false);
         if(!isError){
-            handleEditTodo(todo.id, currentTitle, todo.isDone);
+            handleModalTodo(todo.id, currentTitle, todo.isDone);
         }    
     }
 
@@ -44,7 +44,7 @@ export default function TodoItem({handleEditTodo, todo, handleDeleteTodo}: Props
               id={String(todo.id)}
               checked={todo.isDone}
               onChange={() =>
-                handleEditTodo(todo.id, currentTitle, !todo.isDone)
+                handleModalTodo(todo.id, currentTitle, !todo.isDone)
               }
               type="checkbox"
             />

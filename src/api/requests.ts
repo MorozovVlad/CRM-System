@@ -1,12 +1,10 @@
-import { Todo, TodoFilter, TodosResponse } from "../types/types";
+import { TodoFilter, TodosResponse, Todo } from "../types/types";
 
-export async function getTodos(filter: TodoFilter) : Promise<TodosResponse> {
-  let request =
-    filter == "all"
-      ? "https://tech-mindset.ru/api/v1/tasks"
-      : `https://tech-mindset.ru/api/v1/tasks?statuses=${filter}`;
+export async function getTodos() : Promise<TodosResponse> {
+  let request = "https://tech-mindset.ru/api/v1/tasks"
 
   const data = await fetch(request);
+  console.log(data)
   if (!data.ok) {
     throw new Error();
   }
@@ -15,13 +13,13 @@ export async function getTodos(filter: TodoFilter) : Promise<TodosResponse> {
 }
     
 export async function addTodo(newTodo: Todo) {
-    const data = await fetch('https://easydev.club/api/v1/todos',{
-        method: 'POST',
-            body: JSON.stringify(newTodo)
-    })
-    if (!data.ok) {
-      throw new Error();
-    }
+  const data = await fetch("https://tech-mindset.ru/api/v1/tasks", {
+    method: "POST",
+    body: JSON.stringify(newTodo),
+  });
+  if (!data.ok) {
+    throw new Error();
+  }
 }
 
 export async function deleteTodo(id:number) {
@@ -33,12 +31,12 @@ export async function deleteTodo(id:number) {
     }
 }
 
-export async function editTodo(newTodo: any, id:number) {
-    const data = await fetch(`https://tech-mindset.ru/api/v1/tasks/${id}`,{
-        method: "PUT",
-        body: JSON.stringify(newTodo)
-    })
-    if (!data.ok) {
-      throw new Error();
-    }
+export async function editTodo(newTodo: Todo, id: number) {
+  const data = await fetch(`https://tech-mindset.ru/api/v1/tasks/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(newTodo),
+  });
+  if (!data.ok) {
+    throw new Error();
+  }
 }
