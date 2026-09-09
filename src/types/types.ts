@@ -1,7 +1,10 @@
-// export type NewTodo = {
-//     isDone: boolean;
-//     title: string;
-// }
+export type NewTodo = {
+    title: string;
+    status: string;
+    deadline: string;
+    description: string;
+    executorId: number;
+}
 
 export type Executor = {
   id: number;
@@ -14,14 +17,14 @@ export type Creator = {
 };
 
 export type Todo = {
-    id?: number;
+    id: number;
     title: string;
     status: string;
-    executor?: Executor;
+    executor: Executor;
     deadline: string;
-    creator?: Creator;
-    createdAt?: string;
-    updatedAt?: string;
+    creator: Creator;
+    createdAt: string;
+    updatedAt: string;
     description: string
 }
 

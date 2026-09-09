@@ -1,5 +1,5 @@
 import { deleteTodo, addTodo } from "../api/requests";
-import { Todo, TodoInfo, TodoFilter } from "../types/types";
+import { Todo, TodoInfo, TodoFilter, NewTodo } from "../types/types";
 import { Table } from 'antd';
 import { Tag } from 'antd';
 import { useState } from "react";
@@ -71,7 +71,7 @@ export default function TodoList({ todos, getLoadData, setSelectedTodo, selected
   }
 
   async function handleModalTodo(currentTodo: Todo) {
-    const newTodo = {
+    const newTodo: NewTodo = {
       title: currentTodo?.title,
       description: currentTodo?.description,
       executorId: 1,

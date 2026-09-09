@@ -1,4 +1,4 @@
-import { TodoFilter, TodosResponse, Todo } from "../types/types";
+import { TodoFilter, TodosResponse, Todo, NewTodo } from "../types/types";
 
 export async function getTodos() : Promise<TodosResponse> {
   let request = "https://tech-mindset.ru/api/v1/tasks"
@@ -12,7 +12,7 @@ export async function getTodos() : Promise<TodosResponse> {
   return dataJson;
 }
     
-export async function addTodo(newTodo: Todo) {
+export async function addTodo(newTodo: NewTodo) {
   const data = await fetch("https://tech-mindset.ru/api/v1/tasks", {
     method: "POST",
     body: JSON.stringify(newTodo),
@@ -31,7 +31,7 @@ export async function deleteTodo(id:number) {
     }
 }
 
-export async function editTodo(newTodo: Todo, id: number) {
+export async function editTodo(newTodo: NewTodo, id: number) {
   const data = await fetch(`https://tech-mindset.ru/api/v1/tasks/${id}`, {
     method: "PUT",
     body: JSON.stringify(newTodo),

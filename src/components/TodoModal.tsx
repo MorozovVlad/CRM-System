@@ -7,8 +7,8 @@ import { editTodo } from "../api/requests";
 
 type Props = {
   isModalOpen: boolean;
-  handleCancel: () => void;
-  todo: Todo;
+  handleCancel: React.Dispatch<React.SetStateAction<boolean>>;
+  todo?: Todo;
   getLoadData: () => void;
   handleModalTodo:(currentTodo:Todo) => void;
   titleModal: string
@@ -23,10 +23,10 @@ export default function TodoModal({
   handleModalTodo,
   titleModal,
 }: Props) {
-  const [currentTodo, setCurrentTodo] = useState<Todo>(todo);
-  useEffect(() => {
-    setCurrentTodo(todo);
-  }, [todo]);
+  const [currentTodo, setCurrentTodo] = useState<Todo | null>(todo ?? null);
+  // useEffect(() => {
+  //   setCurrentTodo(todo);
+  // }, [todo]);
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function TodoModal({
         title={titleModal}
         closable={{ "aria-label": "Custom Close Button" }}
         open={isModalOpen}
-        onOk={() => handleModalTodo(currentTodo)}
+        onOk={() => handleModalTodo(currentTodo!)}
         onCancel={() => handleCancel(false)}
         width={760}
       >
@@ -42,7 +42,7 @@ export default function TodoModal({
         <Input
           value={currentTodo?.title}
           onChange={(e) =>
-            setCurrentTodo({ ...currentTodo, title: e.target.value })
+            setCurrentTodo({ ...currentTodo!, title: e.target.value })
           }
         />
         <p>* Описание</p>
