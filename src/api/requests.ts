@@ -4,11 +4,12 @@ export async function getTodos() : Promise<TodosResponse> {
   let request = "https://tech-mindset.ru/api/v1/tasks"
 
   const data = await fetch(request);
-  console.log(data)
+  
   if (!data.ok) {
     throw new Error();
   }
   const dataJson = await data.json();
+  console.log(dataJson)
   return dataJson;
 }
     

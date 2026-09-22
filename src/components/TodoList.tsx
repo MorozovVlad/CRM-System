@@ -71,6 +71,7 @@ export default function TodoList({ todos, getLoadData, setSelectedTodo, selected
   }
 
   async function handleModalTodo(currentTodo: Todo) {
+    console.log(currentTodo)
     const newTodo: NewTodo = {
       title: currentTodo?.title,
       description: currentTodo?.description,

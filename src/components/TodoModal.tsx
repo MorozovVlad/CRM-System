@@ -24,9 +24,6 @@ export default function TodoModal({
   titleModal,
 }: Props) {
   const [currentTodo, setCurrentTodo] = useState<Todo | null>(todo ?? null);
-  // useEffect(() => {
-  //   setCurrentTodo(todo);
-  // }, [todo]);
 
   return (
     <>
@@ -50,6 +47,12 @@ export default function TodoModal({
           placeholder="Опишите задачу, добавьте заголовки и списки..."
           style={{ height: 200, resize: "none" }}
           value={todo?.description}
+          onChange={(e) =>{
+            setCurrentTodo({ ...currentTodo!, description: e.target.value }),
+            console.log(todo?.description)
+          }
+            
+          }
         />
         <div style={{ display: "flex", gap: "12px" }}>
           <div>

@@ -59,7 +59,7 @@ export default function TodoDetails({selectedTodo, todos, getLoadData}: Props) {
         setIsModalOpen(false);
       }; 
 
-
+    console.log(todo?.description)
     return (
       <div className="todoDetails">
         <Dropdown
@@ -94,6 +94,10 @@ export default function TodoDetails({selectedTodo, todos, getLoadData}: Props) {
         <p className="todoDetails-value">
           <span className="todoDetails-label">Обновлена: </span>
           {formatDate(todo?.updatedAt)}
+        </p>
+        <p className="todoDetails-value">
+          <span className="todoDetails-label">Описание: </span>
+          {todo?.description}
         </p>
 
         <TodoModal
