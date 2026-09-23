@@ -5,6 +5,7 @@ import { Tag } from 'antd';
 import { useState } from "react";
 import TodoModal from "./TodoModal";
 import { Button } from "antd";
+import dayjs from 'dayjs';
 
 type Props = {
   todos: Todo[];
@@ -53,6 +54,9 @@ const columns = [
       if(!deadline){
         return "-"
       }
+      else{
+        return dayjs(deadline).format('DD.MM.YYYY HH:mm')
+      }
     }
   },
 ];
@@ -84,7 +88,7 @@ export default function TodoList({ todos, getLoadData, setSelectedTodo, selected
     setIsModalOpen(false);
   }
 
-  console.log(todos);
+  console.log(inSprintTodos);
   return (
     <div className="todoList">
       <Button onClick={() => setIsModalOpen(true)} type="primary">
@@ -92,6 +96,7 @@ export default function TodoList({ todos, getLoadData, setSelectedTodo, selected
       </Button>
       <p>Спринт {inSprintTodos.length} задач</p>
       <Table
+        rowKey="id"
         className="todo-table"
         style={{ width: "100%", cursor: "pointer" }}
         dataSource={inSprintTodos}
@@ -109,6 +114,7 @@ export default function TodoList({ todos, getLoadData, setSelectedTodo, selected
       />
       <p>Бэклог: {backlogTodos.length} задач</p>
       <Table
+        rowKey="id"
         style={{ width: "100%", cursor: "pointer" }}
         dataSource={backlogTodos}
         columns={columns}

@@ -59,7 +59,7 @@ export default function TodoDetails({selectedTodo, todos, getLoadData}: Props) {
         setIsModalOpen(false);
       }; 
 
-    console.log(todo?.description)
+    // console.log(todo?.description)
     return (
       <div className="todoDetails">
         <Dropdown

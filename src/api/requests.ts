@@ -14,6 +14,7 @@ export async function getTodos() : Promise<TodosResponse> {
 }
     
 export async function addTodo(newTodo: NewTodo) {
+  console.log(newTodo)
   const data = await fetch("https://tech-mindset.ru/api/v1/tasks", {
     method: "POST",
     body: JSON.stringify(newTodo),

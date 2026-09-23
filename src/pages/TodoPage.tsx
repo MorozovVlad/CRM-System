@@ -14,7 +14,6 @@ export default function TodoPage() {
   }, [])
 
   async function getLoadData() {
-    console.log("1111111111111111111111111111111111111111111111111")
     try{
         const data = await getTodos();
         let all = 0;

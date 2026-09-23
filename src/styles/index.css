@@ -20,6 +20,7 @@ body{
 }
 .todoDetails{
   /* background-color: #ccc; */
+  width: 30%;
   height: 400px;
   padding: 40px;
   border: 1px solid rgb(209, 209, 209);

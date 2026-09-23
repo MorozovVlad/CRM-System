@@ -3,7 +3,7 @@ import type { DatePickerProps } from 'antd';
 import { Todo, TodoInfo } from "../types/types";
 import { useEffect, useState } from 'react';
 import { editTodo } from "../api/requests";
-
+import dayjs from 'dayjs';
 
 type Props = {
   isModalOpen: boolean;
@@ -24,6 +24,9 @@ export default function TodoModal({
   titleModal,
 }: Props) {
   const [currentTodo, setCurrentTodo] = useState<Todo | null>(todo ?? null);
+  useEffect(() => {
+    setCurrentTodo(todo ?? null);
+  }, [todo]);
 
   return (
     <>
@@ -46,11 +49,11 @@ export default function TodoModal({
         <TextArea
           placeholder="Опишите задачу, добавьте заголовки и списки..."
           style={{ height: 200, resize: "none" }}
-          value={todo?.description}
+          value={currentTodo?.description}
           onChange={(e) =>{
-            setCurrentTodo({ ...currentTodo!, description: e.target.value }),
-            console.log(todo?.description)
-          }
+              setCurrentTodo({ ...currentTodo!, description: e.target.value }),
+              console.log(todo?.description)
+            }
             
           }
         />
@@ -73,9 +76,17 @@ export default function TodoModal({
           showTime
           //   onOk={onOk}
           style={{ width: 712 }}
-          // value={formatDate(todo?.deadline)}
+          value={currentTodo?.deadline ? dayjs(currentTodo.deadline) : null}
+          
+          onChange={(e) =>{
+              setCurrentTodo({ ...currentTodo!, deadline: e.toISOString() })
+            }       
+          }
         />
       </Modal>
     </>
   );
 };
+
+
+// 2026-09-30T01:05:05Z
