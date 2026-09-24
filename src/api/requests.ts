@@ -1,7 +1,7 @@
 import { TodoFilter, TodosResponse, Todo, NewTodo } from "../types/types";
 
 export async function getTodos() : Promise<TodosResponse> {
-  let request = "https://tech-mindset.ru/api/v1/tasks"
+  let request = "https://tech-mindset.ru/api/v1/tasks/?limit=100"
 
   const data = await fetch(request);
   

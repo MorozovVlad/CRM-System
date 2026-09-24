@@ -9,7 +9,7 @@ body{
   width: 70%;
   margin:50px auto;
   display: flex;
-  /* gap: 50px; */
+  gap: 0px;
 }
 
 .todoList{
@@ -20,7 +20,9 @@ body{
 }
 .todoDetails{
   /* background-color: #ccc; */
-  width: 30%;
+  /* width: 20%; */
+  position: fixed;
+  left: calc(64% + 80px);
   height: 400px;
   padding: 40px;
   border: 1px solid rgb(209, 209, 209);

@@ -97,7 +97,7 @@ export default function TodoDetails({selectedTodo, todos, getLoadData}: Props) {
         </p>
         <p className="todoDetails-value">
           <span className="todoDetails-label">Описание: </span>
-          {todo?.description}
+          {todo?.description ? todo?.description : "Описание не добавлено"}
         </p>
 
         <TodoModal
