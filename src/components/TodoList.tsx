@@ -115,11 +115,15 @@ export default function TodoList({ todos, getLoadData, setSelectedTodo, selected
       <p>Бэклог: {backlogTodos.length} задач</p>
       <Table
         rowKey="id"
+        className="todo-table"
         style={{ width: "100%", cursor: "pointer" }}
         dataSource={backlogTodos}
         columns={columns}
         pagination={false}
         showHeader={false}
+        rowClassName={(record) =>
+          record.id === selectedTodo ? "selected-row" : ""
+        }
         onRow={(todo) => ({
           onClick: () => {
             handleSelectTodo(todo);

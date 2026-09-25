@@ -74,32 +74,37 @@ export default function TodoDetails({selectedTodo, todos, getLoadData}: Props) {
           <span className="todoDetails-label">Статус: </span>
           {todo?.status}
         </p>
+        <hr className="todoDetails-hr"/>
         <p className="todoDetails-value">
           <span className="todoDetails-label">Исполнитель: </span>{" "}
           <UserOutlined /> {todo?.executor.name}
         </p>
+        <hr className="todoDetails-hr"/>
         <p className="todoDetails-value">
           <span className="todoDetails-label">Создатель: </span>{" "}
           <UserOutlined /> {todo?.creator.name}
         </p>
+        <hr className="todoDetails-hr"/>
         <p className="todoDetails-value">
           <span className="todoDetails-label">Дедлайн: </span>
           <CalendarOutlined />
           {formatDate(todo?.deadline)}
         </p>
+        <hr className="todoDetails-hr"/>
         <p className="todoDetails-value">
           <span className="todoDetails-label">Создана: </span>
           {formatDate(todo?.createdAt)}
         </p>
+        <hr className="todoDetails-hr"/>
         <p className="todoDetails-value">
           <span className="todoDetails-label">Обновлена: </span>
           {formatDate(todo?.updatedAt)}
         </p>
+        <hr className="todoDetails-hr"/>
+        <p className="todoDetails-title">Описание</p>
         <p className="todoDetails-value">
-          <span className="todoDetails-label">Описание: </span>
           {todo?.description ? todo?.description : "Описание не добавлено"}
         </p>
-
         <TodoModal
           titleModal="Редактировать задачу"
           isModalOpen={isModalOpen}
