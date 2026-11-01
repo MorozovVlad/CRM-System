@@ -1,44 +1,24 @@
-import { NewTodo, TodoFilter, TodosResponse } from "../types/types";
+import { TodoFilter, TodosResponse, Todo, NewTodo } from "../types/types";
+import axios from 'axios';
 
-export async function getTodos(filter: TodoFilter) : Promise<TodosResponse> {
-  let request =
-    filter == "all"
-      ? "https://easydev.club/api/v1/todos"
-      : `https://easydev.club/api/v1/todos?filter=${filter}`;
 
-  const data = await fetch(request);
-  if (!data.ok) {
-    throw new Error();
-  }
-  const dataJson = await data.json();
-  return dataJson;
+export async function getTodos(){
+  let data = await axios.get("https://tech-mindset.ru/api/v1/tasks",{
+    params: {
+      limit:100
+    }
+  })
+  return data.data
 }
     
 export async function addTodo(newTodo: NewTodo) {
-    const data = await fetch('https://easydev.club/api/v1/todos',{
-        method: 'POST',
-            body: JSON.stringify(newTodo)
-    })
-    if (!data.ok) {
-      throw new Error();
-    }
+  await axios.post("https://tech-mindset.ru/api/v1/tasks", newTodo)
 }
 
 export async function deleteTodo(id:number) {
-    const data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
-        method: 'DELETE',
-    })
-    if (!data.ok) {
-      throw new Error();
-    }
+  await axios.delete(`https://easydev.club/api/v1/todos/${id}`)
 }
 
-export async function editTodo(newTodo: NewTodo, id:number) {
-    const data = await fetch(`https://easydev.club/api/v1/todos/${id}`,{
-        method: "PUT",
-        body: JSON.stringify(newTodo)
-    })
-    if (!data.ok) {
-      throw new Error();
-    }
+export async function editTodo(newTodo: NewTodo, id: number) {
+  await axios.put(`https://tech-mindset.ru/api/v1/tasks/${id}`, newTodo)
 }
