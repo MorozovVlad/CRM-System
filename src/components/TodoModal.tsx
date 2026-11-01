@@ -1,6 +1,6 @@
-import { Input, Modal, Select, DatePicker } from 'antd';
+import {Button, Input, Modal, Select, DatePicker, Form } from 'antd';
 import type { DatePickerProps } from 'antd';
-import { Todo, TodoInfo } from "../types/types";
+import { Todo, NewTodo } from "../types/types";
 import { useEffect, useState } from 'react';
 import { editTodo } from "../api/requests";
 import dayjs from 'dayjs';
@@ -10,8 +10,16 @@ type Props = {
   handleCancel: React.Dispatch<React.SetStateAction<boolean>>;
   todo?: Todo;
   getLoadData: () => void;
-  handleModalTodo:(currentTodo:Todo) => void;
-  titleModal: string
+  handleModalTodo: (currentTodo: NewTodo) => void;
+  titleModal: string;
+};
+
+type TodoModalValues = {
+  title: string;
+  description: string;
+  executorId: number;
+  status: string;
+  deadline: any;
 };
 
 const { TextArea } = Input;
@@ -23,10 +31,27 @@ export default function TodoModal({
   handleModalTodo,
   titleModal,
 }: Props) {
-  const [currentTodo, setCurrentTodo] = useState<Todo | null>(todo ?? null);
+
+
+  const [form] = Form.useForm<TodoModalValues>();
+
+  const handleFiinish = (values: TodoModalValues)=>{
+    console.log({ ...values!, id: todo?.id });
+    handleModalTodo({...values!, id: todo?.id});
+  }
+
+  const handleFiinishFailed = (errorInfo: any) => {
+    console.log(errorInfo);
+  };
+
   useEffect(() => {
-    setCurrentTodo(todo ?? null);
-  }, [todo]);
+    form.setFieldsValue({
+      title: todo?.title,
+      description: todo?.description,
+      deadline: todo?.deadline ? dayjs(todo.deadline) : null,
+    });
+  }, [isModalOpen]);
+  console.log(form)
 
   return (
     <>
@@ -34,59 +59,53 @@ export default function TodoModal({
         title={titleModal}
         closable={{ "aria-label": "Custom Close Button" }}
         open={isModalOpen}
-        onOk={() => handleModalTodo(currentTodo!)}
+        // onOk={() => handleModalTodo(currentTodo!)}
         onCancel={() => handleCancel(false)}
         width={760}
+        footer={null}
       >
-        <p>* Название</p>
-        <Input
-          value={currentTodo?.title}
-          onChange={(e) =>
-            setCurrentTodo({ ...currentTodo!, title: e.target.value })
-          }
-        />
-        <p>* Описание</p>
-        <TextArea
-          placeholder="Опишите задачу, добавьте заголовки и списки..."
-          style={{ height: 200, resize: "none" }}
-          value={currentTodo?.description}
-          onChange={(e) =>{
-              setCurrentTodo({ ...currentTodo!, description: e.target.value }),
-              console.log(todo?.description)
-            }
-            
-          }
-        />
-        <div style={{ display: "flex", gap: "12px" }}>
-          <div>
-            <p>* Исполнитель</p>
-            <Select style={{ width: 350 }} value={todo?.executor.name} />
+        <Form
+          layout="vertical"
+          form={form}
+          onFinishFailed={handleFiinishFailed}
+          onFinish={handleFiinish}
+        >
+          <Form.Item
+            rules={[
+              { required: true, message: "Заполните название" },
+              { min: 4, message: "Минимум 4 символа в названии" },
+              { max: 64, message: "Максимум 64 символа в названии" },
+            ]}
+            name="title"
+            label="Название"
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item name="description" label="Описание">
+            <TextArea />
+          </Form.Item>
+
+          <div style={{ display: "flex", gap: "12px" }}>
+            <Form.Item name="executorId" label="Исполнитель">
+              <Select style={{ width: 350 }} />
+            </Form.Item>
+
+            <Form.Item name="status" label="Статус">
+              <Select style={{ width: 350 }} />
+            </Form.Item>
           </div>
-          <div>
-            <p>* Статус</p>
-            <Select
-              value={todo?.status}
-              style={{ width: 350 }}
-              // options={TodoInfo}
-            />
-          </div>
-        </div>
-        <p>Дедлайн</p>
-        <DatePicker
-          showTime
-          //   onOk={onOk}
-          style={{ width: 712 }}
-          value={currentTodo?.deadline ? dayjs(currentTodo.deadline) : null}
-          
-          onChange={(e) =>{
-              setCurrentTodo({ ...currentTodo!, deadline: e.toISOString() })
-            }       
-          }
-        />
+
+          <Form.Item name="deadline" label="Дэдлайн">
+            <DatePicker style={{ width: 712 }} />
+          </Form.Item>
+
+          <Button type="primary" htmlType="submit">
+            Сохранить
+          </Button>
+        </Form>
       </Modal>
     </>
   );
 };
 
-
-// 2026-09-30T01:05:05Z

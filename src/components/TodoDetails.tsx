@@ -1,4 +1,4 @@
-import { Todo, TodoInfo, TodoStatusCounts } from "../types/types";
+import { NewTodo, Todo, TodoInfo, TodoStatusCounts } from "../types/types";
 import { UserOutlined, CalendarOutlined, EllipsisOutlined  } from '@ant-design/icons';
 import { Button, Dropdown} from 'antd';
 import TodoModal from "./TodoModal";
@@ -46,18 +46,18 @@ export default function TodoDetails({selectedTodo, todos, getLoadData}: Props) {
     }
 
 
-    async function handleModalTodo(currentTodo:Todo) {
-        const newTodo = {
-          title: currentTodo?.title,
-          description: currentTodo?.description,
-          executorId: 1,
-          status: currentTodo?.status,
-          deadline: currentTodo?.deadline,
-        };
-        await editTodo(newTodo, currentTodo.id);
-        await getLoadData();
-        setIsModalOpen(false);
-      }; 
+    async function handleModalTodo(currentTodo: NewTodo) {
+      const newTodo = {
+        title: currentTodo?.title,
+        description: currentTodo?.description,
+        executorId: 1,
+        status: currentTodo?.status,
+        deadline: currentTodo?.deadline,
+      };
+      await editTodo(newTodo, currentTodo.id);
+      await getLoadData();
+      setIsModalOpen(false);
+    }; 
 
     // console.log(todo?.description)
     return (
